@@ -1,0 +1,93 @@
+package com.qianxiao996.ctfknife;
+
+import com.qianxiao996.ctfknife.Ctfknife_Controller;
+import com.qianxiao996.ctfknife.Encode.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.util.Objects;
+
+public class Controller_One {
+
+    @FXML
+    public Label label;
+
+    @FXML
+    public TextField line_text;
+    private Ctfknife_Controller appController; //声明父类
+
+    private TextArea selectedTextArea_Result;
+    private String encode_type;
+    private String source_text;
+    private String encoding;
+    private boolean is_line;
+    private String label_text;
+    private String type;
+    void setMainController(Ctfknife_Controller appController, TextArea selectedTextArea_Result, String encode_type, String source_text, String encoding, boolean is_line, String type){
+        //获取父类的对象
+        this.appController=appController;
+        this.selectedTextArea_Result = selectedTextArea_Result;
+        this.encode_type=encode_type;
+        this.source_text = source_text;
+        this.encoding=encoding;
+        this.is_line=is_line;
+        this.type=type;
+    }
+    @FXML
+    void button_click(ActionEvent event) {
+        String text = line_text.getText();
+//        selectedTextArea_Result.setText(text);
+//        System.out.println(selectedTextArea_Result.getText());
+        //给主窗口添加值存储
+        appController.Change_Ui_One_Value(text);
+//      调用编码解码
+        if(Objects.equals(type, "encode_base")){
+            Class_Base_Encode myThread = new Class_Base_Encode();
+            myThread.setValue(selectedTextArea_Result,encode_type,source_text,encoding,is_line);
+            Thread t = new Thread(myThread);
+            myThread.setOne(text);
+            t.setDaemon(true);
+            t.start();
+
+        } else if (Objects.equals(type, "decode_base")) {
+            Class_Base_Decode myThread = new Class_Base_Decode();
+            myThread.setValue(selectedTextArea_Result,encode_type,source_text,encoding,is_line);
+            Thread t = new Thread(myThread);
+            t.setDaemon(true);
+            t.start();
+        } else if (Objects.equals(type, "encrypt")) {
+            Class_Encrypt myThread = new Class_Encrypt();
+            myThread.setValue(selectedTextArea_Result,encode_type,source_text,encoding,is_line);
+            myThread.setOne(text);
+            Thread t = new Thread(myThread);
+            t.setDaemon(true);
+            t.start();
+        } else if (Objects.equals(type, "decrypt")) {
+            Class_Decrypt myThread = new Class_Decrypt();
+            myThread.setValue(selectedTextArea_Result,encode_type,source_text,encoding,is_line);
+            Thread t = new Thread(myThread);
+            myThread.setOne(text);
+            t.setDaemon(true);
+            t.start();
+        } else if (Objects.equals(type, "tools")) {
+            Class_Tools myThread = new Class_Tools();
+            myThread.setValue(selectedTextArea_Result,encode_type,source_text,encoding,is_line);
+            Thread t = new Thread(myThread);
+            myThread.setOne(text);
+            t.setDaemon(true);
+            t.start();
+        }
+        //关闭当前窗口
+        Stage stage = (Stage) line_text.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+
+
+
+    }
+
+}
