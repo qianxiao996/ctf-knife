@@ -2,7 +2,7 @@
 
 此工具基于[CTF-Tools](https://github.com/qianxiao996/CTF-Tools) 重构
 
-![img](https://github.com/qianxiao996/ctf-knife/blob/master/img/index.png)
+![loading-ag-429](./img/index.png)
 
 一款CTF编码、解码、加密、解密工具。
 
