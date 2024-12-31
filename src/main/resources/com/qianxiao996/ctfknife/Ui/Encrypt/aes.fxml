@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER_LEFT" prefHeight="593.0" prefWidth="944.0" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.371" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Aes">
+   <children>
+      <HBox>
+         <children>
+            <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0" HBox.hgrow="ALWAYS">
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints minWidth="10.0" />
+                  <ColumnConstraints minWidth="10.0" />
+                  <ColumnConstraints minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="模式" GridPane.columnIndex="4" />
+                  <ComboBox fx:id="mode" minHeight="32.0" prefWidth="190.0" GridPane.columnIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#func_encrypt" prefHeight="32.0" prefWidth="50.0" text="加密" GridPane.columnIndex="6" />
+                  <Label text="填充" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="padding_combox" minHeight="32.0" prefWidth="190.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#func_decrypt" prefHeight="32.0" prefWidth="50.0" text="解密" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="input_encoding" minHeight="32.0" prefWidth="110.0" GridPane.columnIndex="3" />
+                  <ComboBox fx:id="output_encoding" minHeight="32.0" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label text="输入编码" GridPane.columnIndex="2" />
+                  <Label text="输出编码" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <HBox GridPane.columnIndex="1">
+                     <children>
+                        <TextField fx:id="key_text" maxHeight="32.0" minHeight="32.0" promptText="请输入Key" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="key_encoding" minHeight="32.0" prefWidth="110.0" />
+                     </children>
+                  </HBox>
+                  <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="iv_text" maxHeight="32.0" minHeight="32.0" promptText="请输入IV" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="iv_encoding" minHeight="32.0" prefWidth="110.0" />
+                     </children>
+                  </HBox>
+                  <Label minHeight="30.0" minWidth="30.0" text="Key:">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label minHeight="30.0" minWidth="30.0" text="IV:" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </GridPane>
+         </children>
+      </HBox>
+      <VBox spacing="3.0" VBox.vgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="源文本：" HBox.hgrow="ALWAYS" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="source_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" text="复制" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <tooltip>
+                        <Tooltip text="复制" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="source_textarea_paste" alignment="TOP_LEFT" mnemonicParsing="false" text="粘贴" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="粘贴" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="source_textarea_clear" alignment="TOP_LEFT" mnemonicParsing="false" text="清空" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="清空" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea fx:id="TextArea_Source" wrapText="true" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label alignment="TOP_LEFT" contentDisplay="TOP" text="结果：" HBox.hgrow="ALWAYS" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="button_to_source" alignment="TOP_LEFT" mnemonicParsing="false" text="转源" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="转源文本" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="result_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" text="复制" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <tooltip>
+                        <Tooltip text="复制" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="result_textarea_paste" alignment="TOP_LEFT" mnemonicParsing="false" text="粘贴" textAlignment="CENTER">
+                     <tooltip>
+                        <Tooltip text="粘贴" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="result_textarea_clear" alignment="TOP_LEFT" mnemonicParsing="false" text="清空">
+                     <tooltip>
+                        <Tooltip text="清空" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea fx:id="TextArea_Result" wrapText="true" VBox.vgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

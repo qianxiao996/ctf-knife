@@ -1,0 +1,388 @@
+
+.root{
+    -fx-background-color:black;
+}
+
+.label{
+    -fx-text-fill: #fff;
+}
+.check-box{
+    -fx-text-fill: #fff;
+}
+.check-box .box{
+     -fx-background-color:#888;
+     -fx-border-color:#888;
+
+    -fx-background-insets: 0;
+    -fx-background-radius: 0 ;
+}
+.grid-pane .children{
+  -fx-background-color: black;
+}
+.menu-bar{
+    -fx-background-color: black;
+    -fx-border-width: 0 0 1 0px;
+    -fx-border-color: #888;
+}
+.menu-bar .menu{
+     /*-fx-pref-height: 30px;*/
+    -fx-padding: 4 10 4 10;
+}
+.menu-bar .menu-item {
+     /*-fx-pref-height: 30px;*/
+}
+.menu-item {
+      /*-fx-pref-height: 30px;*/
+    -fx-background-color: black;
+}
+
+.menu-bar .menu:showing,.menu-bar .menu:hover{
+   -fx-background-color: #666;
+}
+.menu-bar .menu:showing > .label,.menu-bar .menu:hover > .label{
+   -fx-text-fill: #fff;
+}
+.menu-bar .menu:showing .menu:hover{
+  -fx-background-color: #666;
+}
+.menu-bar .menu:showing .menu:hover >.label{
+   -fx-text-fill: white;
+}
+.menu-bar .menu:showing .menu{
+   -fx-padding: 4 5 4 5;
+}
+
+.menu-item:focused {
+     -fx-background-color: #666;
+}
+.menu-item:focused .label {
+    -fx-text-fill:white;
+}
+.context-menu{
+    -fx-border-color:none;
+    -fx-background-color: black;
+     /* -fx-min-width:80px; */
+}
+.button{
+    -fx-background-color:#444;
+    -fx-background-insets: 0;
+    -fx-text-fill: #fff;
+    /*-fx-pref-height: 27px;*/
+    -fx-background-radius: 0 ;
+    /* -fx-min-width:70px; */
+}
+.button:disabled{
+    -fx-background-color:#888;
+    -fx-background-insets: 0;
+    -fx-text-fill: #333;
+    -fx-background-radius: 0 ;
+}
+
+.button:hover{
+    -fx-background-color:#000;
+    -fx-background-insets: 0;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 0 ;
+}
+
+.text-field,.text-area {
+    -fx-background-color: black;
+    -fx-background-insets: 0,0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-border-color: #888;
+    -fx-text-fill: #fff;
+    -fx-pref-height: 25px;
+}
+.text-field:focused,.text-area:focused{
+    -fx-background-color: black;
+    -fx-border-color: #666;
+}
+.combo-box{
+    -fx-border-color: #888;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-background-color: black;
+    -fx-text-fill: #fff;
+    -fx-background-insets: 0;
+    -fx-alignment: center;
+    -fx-border:0px;
+    -fx-content-display: center;
+    /* -fx-pref-height: 27px; */
+}
+.combo-box .text-field{
+     -fx-border-width: 0;
+}
+.combo-box-base:editable > .arrow-button{
+    -fx-background-color: black;
+}
+.text-area .content{
+    -fx-background-color: black;
+    -fx-border-color: #888;
+    -fx-border-width: 0px;
+}
+.text-area:focused {
+    -fx-background-color: black;
+}
+.list-view{
+    -fx-border-width:0px;
+    -fx-background-color: black;
+}
+
+.list-view:focused{
+    -fx-background-color: #888;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+.list-cell{
+    -fx-background-color: black;
+    /*-fx-pref-height: 27px;*/
+    -fx-text-fill: #666;
+}
+.list-cell:hover{
+    -fx-background-color: #444;
+}
+.list-view .list-cell:selected{
+    -fx-background-color: #666;
+    -fx-text-fill: #fff;
+}
+
+/* 修改TabPane的Pane区域背景颜色 */
+.tab-pane {
+    -fx-background-color: black;
+}
+
+/* 修改Tab的背景颜色 */
+.tab {
+    -fx-background-color: black;
+    -fx-pref-height: 30px;
+    -fx-background-radius: 0;
+    -fx-padding: 0 10 0 10px;
+}
+
+/* tab选中时设置背景颜色 */
+.tab:selected {
+    -fx-border-width: 0 0 2 0px;
+    -fx-border-color: #fff;
+}
+/* 子代选择器，Tab选中的时候选择其子元素tab-label */
+.tab:selected .tab-label {
+    -fx-text-fill: #fff;
+}
+/* 修改顶栏的背景颜色 */
+.tab-pane>*.tab-header-area>*.tab-header-background
+{
+    -fx-background-color:black;
+    -fx-border-width: 0 0 1 0px;
+    -fx-border-color: #888;
+}
+/* 修改Tab中文本的颜色 */
+.tab-label {
+    -fx-text-fill: #666;
+}
+/* Tab选中的时候选中其边框并修改样式*/
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width:0px;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-close-button{
+    -fx-background-color: #fff;
+}
+
+.table-cell{
+    -fx-text-fill: #666;
+}
+.table-row-cell{
+    -fx-cell-size: 30px;
+    -fx-alignment: center;
+    -fx-border-width:0 0 1 0;
+    -fx-border-color:#e8e8e8;
+}
+.table-row-cell:hover{
+    -fx-background-color: #eee;
+    -fx-text-fill: #eee;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: #666;
+    -fx-border-color:none;
+
+}
+.table-row-cell:selected .table-cell {
+    -fx-border-color:#666;
+    -fx-text-fill: #fff;
+}
+
+
+.table-view{
+    -fx-background-color: black;  
+    -fx-border-width:1 0 0 0px;
+    -fx-border-color:#ccc;
+}
+
+
+.table-view .column-header{
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: #fafafa;
+    -fx-border-width:0 1 1 0px;
+    -fx-border-color:#eee;
+    -fx-pref-height: 30px;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #666;
+    -fx-font-size:12px;
+}
+.table-view .filler{
+    -fx-background-color: #fafafa;
+    -fx-border-width:0 0 1 0px;
+    -fx-border-color:#eee;
+}
+
+.titled-pane>.content{
+    -fx-background-color:#fff;
+     -fx-border-width:0px;
+}
+.titled-pane>.title{
+    -fx-background-color:#f5f5f5;
+    -fx-border-color:#d8d8d8;
+    -fx-pref-height:30px;
+}
+
+.split-pane{
+    -fx-background-color:black;
+    -fx-border-width: 0px;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 1px; /* 0 3 0 3 */
+    -fx-background-insets: 0;
+    -fx-background-color: black;
+}
+
+/*dialog*/
+.dialog-pane {
+    -fx-background-color:black;
+    -fx-padding: 0;
+    -fx-graphic: none;
+}
+
+.dialog-pane > .expandable-content {
+    -fx-padding: 0.666em; /* 8px */
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-padding: 0.833em; /* 10px */
+}
+
+.dialog-pane > .content.label {
+    -fx-text-fill: #fff;
+    -fx-alignment: top-left;
+    -fx-padding: 1.333em 0.833em 0 0.833em; /* 16px 10px 0px 10px */
+}
+
+.dialog-pane > .content {
+    -fx-padding: 0.833em; /* 10 */
+}
+
+.alert .label{
+    -fx-text-fill:#666;
+}
+
+.tree-view{
+    -fx-background-color:black;
+    -fx-border-width:1 0 0 0px;
+    -fx-border-color:#888;
+}
+.tree-view:focused,.tree-view:selected{
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+
+}
+.tree-cell{
+    -fx-background-color: black;
+    -fx-text-fill:#888;
+    /*-fx-pref-height:25px;*/
+}
+.tree-cell:selected{
+    -fx-background-color: #444;
+    -fx-text-fill:#fff;
+}
+
+.scroll-bar:vertical{
+    -fx-background-color:#666;
+    -fx-pref-width: 10px;
+}
+.scroll-bar:horizontal{
+    -fx-background-color:#666;
+    -fx-pref-height: 10px;
+}
+/* 增加垂直滚动条的宽度 */
+.scroll-bar:vertical .thumb {
+    -fx-background-color:#666;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: black;
+    -fx-border-color:#444;
+    -fx-background-radius: 0;
+}
+
+/* 增加水平滚动条的高度 */
+.scroll-bar:horizontal .thumb {
+    -fx-background-color:#666;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:horizontal .track {
+    -fx-background-color: black;
+    -fx-border-color:#444;
+    -fx-background-radius: 0;
+}
+#about{
+    -fx-background-color: black;
+}
+#about_img{
+    -fx-border-radius: 5px;
+}
+#about_email{
+    -fx-text-fill: #d79c9c;
+
+}
+#about_user{
+    -fx-text-fill: #d38d8d;
+}
+
+
+
+#sider_tree {
+    /*-fx-border-color: #CCCCCC;*/
+    -fx-border-width: 0 1px 0 0; /* 上 右 下 左 */
+    -fx-border-style: solid;
+    /*-fx-padding: 10px; !* 可选：添加内边距使内容不紧贴边框 *!*/
+}
+/*#sider_search {*/
+/*    -fx-pref-height: 32px; !* 设置按钮的首选宽度 *!*/
+/*    -fx-max-height: 32px; !* 设置按钮的最大高度 *!*/
+/*    -fx-min-height: 32px; !* 设置按钮的最大高度 *!*/
+
+/*}*/
+
+#menubar{
+
+    -fx-max-height: 25px; /* 设置按钮的最大高度 */
+    -fx-min-height: 25px; /* 设置按钮的最大高度 */
+    -fx-pref-height: 25px;
+}
+/* 定义一个通用的选择器，为所有指定ID的按钮在pressed状态下应用相同的样式 */
+#source_textarea_copy:pressed,
+#result_textarea_copy:pressed,
+#source_textarea_paste:pressed,
+#result_textarea_paste:pressed,
+#source_textarea_clear:pressed,
+#result_textarea_clear:pressed,
+#button_to_source:pressed {
+    -fx-translate-y: 2; /* 向下移动2个单位 */
+    -fx-translate-x: 2; /* 向右移动2个单位 */
+}

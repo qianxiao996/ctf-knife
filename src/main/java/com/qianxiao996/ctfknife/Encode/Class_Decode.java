@@ -1,40 +1,45 @@
 package com.qianxiao996.ctfknife.Encode;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import com.qianxiao996.ctfknife.Encode.Utils.Result;
 
-import com.github.charlemaznable.core.lang.Str;
+import com.qianxiao996.ctfknife.Encode.Modules.BrainFuck.BFCodex;
+import com.qianxiao996.ctfknife.Encode.Modules.BrainFuck.Ook;
+import com.qianxiao996.ctfknife.Utils.Conn;
+import com.qianxiao996.ctfknife.Utils.Result;
 import javafx.scene.control.TextArea;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import java.io.*;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.script.ScriptException;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.util.*;
+
+import static com.qianxiao996.ctfknife.Utils.Conn.Get_Real_Str;
 
 public class Class_Decode extends Thread {
 
     private static TextArea textarea_result;
     private String Encode_type;
     private String souce_text;
-    private String encoding;
+    private String input_encoding;
 
     private Boolean is_line;
     private String temp_key_1;
+    private String output_encoding;
 
-    public void setValue(TextArea textarea_result, String Encode_type, String souce_text, String encoding, Boolean is_line) {
+    public void setValue(TextArea textarea_result, String Encode_type, String souce_text, String input_encoding,String output_encoding, Boolean is_line) {
         Class_Decode.textarea_result = textarea_result;
         this.Encode_type = Encode_type;
         this.souce_text = souce_text.trim();
-        this.encoding = encoding;
+        this.input_encoding = input_encoding;
+        this.output_encoding = output_encoding;
         this.is_line =is_line;
-        setOne(textarea_result.getText());
+        setOne(textarea_result.getText(),"UTF-8");
     }
-    public void setOne(String temp_key_1) {
-        this.temp_key_1 = temp_key_1;
+    public void setOne(String temp_key_1,String temp_key_1_encode) {
+        this.temp_key_1 =  Conn.Get_Real_Str(temp_key_1,temp_key_1_encode);
     }
     public void run()  {
         //得到所有源文本换列表
@@ -56,9 +61,10 @@ public class Class_Decode extends Thread {
         for(String text:all_souce_text){
             Method method;
             try {
-                String temp_methods_name  = Encode_type.replace("(", "_").replace(")", "_").replace("->", "_").replace("%", "_");
+                String temp_methods_name  = Encode_type.replace(" ", "_").replace("(", "_").replace(")", "_").replace("->", "_").replace("%", "_");
                 method = clazz.getMethod("Fuc_"+temp_methods_name, String.class, String.class);
                 try{
+                    text = Get_Real_Str(text,input_encoding);
                     Result result = (Result) method.invoke(this, Encode_type,text);
                     if(result.is_success()){
                         textarea_result.appendText(result.getResult_text()+"\r\n");
@@ -78,7 +84,7 @@ public class Class_Decode extends Thread {
     }
     public Result Fuc_URL(String name, String text) throws UnsupportedEncodingException {
         try{
-            String result = URLDecoder.decode(text, encoding);
+            String result = URLDecoder.decode(text, input_encoding);
             return new Result(name,true,result);
         }catch (Exception e){
             return new Result(name,false,e.getMessage());
@@ -179,7 +185,7 @@ public class Class_Decode extends Thread {
             return new Result(name,false,e.getMessage());
         }
     }
-    public Result Fuc_Hex_Str(String name,String text) {
+    public static Result Fuc_Hex_Str(String name, String text) {
         try{
             char[] hexs = text.toCharArray();
             StringBuilder sb = new StringBuilder();
@@ -247,46 +253,26 @@ public class Class_Decode extends Thread {
         }
     }
 
-    public Result Fuc_JsFuck( String name,String text) throws IOException, ScriptException, NoSuchMethodException {
+    public Result Fuc_JsFuck( String name,String text) {
         try{
-            ScriptEngineManager engineManager = new ScriptEngineManager();
-            ScriptEngine engine = engineManager.getEngineByName("nashorn");
-            engine.eval(new FileReader("js/jsfuck_decode.js"));
-            Invocable invocable = (Invocable) engine;
-            Object result = invocable.invokeFunction("decode", text);
+            String result =  Conn.ExEjs("js/jsfuck_decode.js","decode",text);
             return new Result(name,true,(String)result);
         }catch (Exception e){
             return new Result(name,false,e.getMessage());
         }
     }
-    public Result Fuc_JJEncode(String name,String text) throws IOException, ScriptException, NoSuchMethodException {
-        try{
-            // 获取 JavaScript 引擎
-            ScriptEngineManager engineManager = new ScriptEngineManager();
-            ScriptEngine engine = engineManager.getEngineByName("nashorn");
-            engine.eval(new FileReader("js/jjencode.js"));
-            Invocable invocable = (Invocable) engine;
-            Object result = invocable.invokeFunction("jjdecode", text);
-            return new Result(name,true,(String)result);
-        }catch (Exception e){
-            return new Result(name,false,e.getMessage());
-        }
+    public Result Fuc_JJEncode(String name,String text) {
+        String result =  Conn.ExEjs("js/jjencode.js","jjdecode",text);
+        return new Result(name,true,result);
     }
     public Result Fuc_AAEncode(String name,String text) throws IOException, ScriptException, NoSuchMethodException {
-        try{
-            // 获取 JavaScript 引擎
-            ScriptEngineManager engineManager = new ScriptEngineManager();
-            ScriptEngine engine = engineManager.getEngineByName("nashorn");
-            engine.eval(new FileReader("js/aaencode.js"));
-            Invocable invocable = (Invocable) engine;
-            Object result = invocable.invokeFunction("aadecode", text);
-            return new Result(name,true, (String)result);
-        }catch (Exception e){
-            return new Result(name,false,e.getMessage());
-        }
+        String result =  Conn.ExEjs("js/aaencode.js","aadecode",text);
+        return new Result(name,true, (String)result);
     }
 
     public Result Fuc_jother(String name,String text) {
+//        String result =  Conn.ExEjs("js/jother-1.0.rc.js","Jother",text);
+//        return new Result(name,true, (String)result);
         return new Result(name,false,"暂不支持Jother解密，但可以在浏览器按F12打开console，输入密文后回车，可得到解密结果");
     }
     public Result Fuc_百家姓编码(String name,String text) {
@@ -367,7 +353,11 @@ public class Class_Decode extends Thread {
             CODE.put("钟","*");
             ArrayList<String> return_data = new ArrayList<>();
             for(int i=0;i<text.length();++i){
-                return_data.add(CODE.get(String.valueOf(text.charAt(i))));
+                if(CODE.get(String.valueOf(text.charAt(i)))!=null){
+                    return_data.add(CODE.get(String.valueOf(text.charAt(i))));
+                }else{
+                    return_data.add(String.valueOf(text.charAt(i)));
+                }
             }
             return new Result(name,true,String.join("", return_data));
         }catch (Exception e){
@@ -375,23 +365,39 @@ public class Class_Decode extends Thread {
         }
     }
 
-    public Result Fuc_核心价值观编码(String name,String text) throws FileNotFoundException, ScriptException, NoSuchMethodException {
-        try{
-            // 获取 JavaScript 引擎
-            ScriptEngineManager engineManager = new ScriptEngineManager();
-            ScriptEngine engine = engineManager.getEngineByName("nashorn");
-            engine.eval(new FileReader("js/hexinjiazhiguan.js"));
-            Invocable invocable = (Invocable) engine;
-            Object result = invocable.invokeFunction("valuesDecode", text);
-//        System.out.println("执行结果：" + result);
-            return new Result(name,true, (String)result);
-        }catch (Exception e){
-            return new Result(name,false,e.getMessage());
-        }
+    public Result Fuc_核心价值观编码(String name,String text) {
+        String result =   Conn.ExEjs("js/hexinjiazhiguan.js","valuesDecode",text);
+        return new Result(name, true, result);
 
 
     }
 
 
 
+    public Result Fuc_UUEncode(String name,String text) {
+        String result =   Conn.ExEjs("js/Uuencode.js","decode",text);
+        return new Result(name, true, result);
+    }
+    public Result Fuc_XXEncode(String name,String text) {
+        String result =   Conn.ExEjs("js/Xxencode.js","decode",text);
+        return new Result(name, true, result);
+    }
+
+    public Result Fuc_BrainFuck(String name,String text) {
+        String result = (BFCodex.mBFToText(text));
+        return new Result(name, true, result);
+    }
+
+    public Result Fuc_Ook(String name,String text) {
+        String result = Ook.decode(text);
+        return new Result(name, true, result);
+    }
+    public Result Fuc_Ook_Short_(String name,String text) {
+        String result = Ook.decode_Short(text);
+        return new Result(name, true, result);
+    }
+    public Result Fuc_Quoted_Printable(String name,String text) {
+        String result =  Conn.ExEjs_2("js/Quoted-Printable.js","unescapeFromQuotedPrintable",text,input_encoding);
+        return new Result(name, true, result);
+    }
 }

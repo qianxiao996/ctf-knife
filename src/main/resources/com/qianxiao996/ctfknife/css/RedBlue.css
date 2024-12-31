@@ -1,0 +1,402 @@
+.root{
+    -fx-background-color:#fff;
+}
+
+
+.label{
+    -fx-text-fill: #666;
+}
+
+.check-box .box{
+     -fx-background-color:#fff;
+     -fx-border-color:#ccc;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0 ;
+}
+.check-box:selected{
+    -fx-text-fill:#fe1976;
+    -fx-border-fill:#fe1976;
+}
+.grid-pane .children{
+  -fx-background-color: #fff;
+}
+.menu-bar{
+    -fx-background-color: #fff;
+    -fx-border-width: 0 0 1 0px;
+    -fx-border-color: #ccc;
+    /*-fx-border-width: 0 0 0 1px;*/
+}
+.menu-bar .label{
+    -fx-text-fill: #333;
+}
+.menu-bar .menu{
+    /*-fx-pref-height: 30px;*/
+    -fx-padding: 4 10 4 10;
+}
+.menu-bar .menu-item {
+    /*-fx-pref-height: 30px;*/
+}
+.menu-item {
+     /*-fx-pref-height: 30px;*/
+    -fx-background-color: #fff;
+}
+
+.menu-bar .menu:showing,.menu-bar .menu:hover{
+   -fx-background-color: #91adf2;
+}
+.menu-bar .menu:showing > .label,.menu-bar .menu:hover > .label{
+   -fx-text-fill: #fff;
+}
+.menu-bar .menu:showing .menu:hover{
+  -fx-background-color: #91adf2;
+}
+.menu-bar .menu:showing .menu:hover >.label{
+   -fx-text-fill: #fff;
+}
+.menu-bar .menu:showing .menu{
+   -fx-padding: 4 5 4 5;
+}
+
+.menu-item:focused {
+     -fx-background-color: #91adf2;
+}
+.menu-item:focused .label {
+    -fx-text-fill:#fff;
+}
+.context-menu{
+    -fx-border-color:none;
+    -fx-background-color: #fff;
+    /*-fx-min-width:80px;*/
+}
+.button{
+    -fx-background-color:#365ff7;
+    -fx-background-insets: 0;
+    -fx-text-fill: #fff;
+    /*-fx-pref-height: 27px;*/
+    -fx-background-radius: 0 ;
+    /*-fx-min-width:70px;*/
+}
+.button:disabled{
+    -fx-background-color:#666;
+    -fx-background-insets: 0;
+    -fx-text-fill: #000;
+    -fx-background-radius: 0 ;
+}
+
+.button:hover{
+    -fx-background-color:#fe1976;
+    -fx-background-insets: 0;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 0 ;
+}
+
+.text-field,.text-area {
+    -fx-background-color: #fff;
+    /*-fx-background-insets: 0,0 0 1 0 ;*/
+    /*-fx-background-radius: 0 ;*/
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-text-fill: #666;
+    -fx-highlight-fill: #6d96e2;
+
+    /*-fx-pref-height:27px;*/
+}
+.text-field:focused,.text-area:focused{
+    -fx-background-color: #fff;
+    -fx-border-color: #ed90a9;
+}
+.combo-box{
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-background-color: #fff;
+    -fx-text-fill: #444;
+    -fx-background-insets: 0;
+    -fx-alignment: center;
+    -fx-border:0px;
+    -fx-pref-height:25px;
+    -fx-content-display: center;
+}
+.combo-box .text-field{
+     -fx-border-width: 0;
+}
+.combo-box-base:editable > .arrow-button{
+    -fx-background-color: #fff;
+}
+.text-area .content{
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 0px;
+}
+
+
+.text-area:focused {
+    -fx-background-color: #fff;
+}
+.list-view{
+    -fx-border-width:0px;
+}
+
+.list-view:focused{
+    -fx-background-color: #ccc;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+/*.list-cell{*/
+/*    -fx-pref-height: 27px;*/
+/*    -fx-text-fill: #666;*/
+/*}*/
+.list-cell:hover{
+    -fx-background-color: #eee;
+}
+.list-view .list-cell:selected{
+    -fx-background-color: #FF6699;
+    -fx-text-fill: #fff;
+}
+
+/* 修改TabPane的Pane区域背景颜色 */
+.tab-pane {
+    -fx-background-color: #fff;
+}
+
+/* 修改Tab的背景颜色 */
+.tab {
+    -fx-background-color: #fff;
+    -fx-pref-height: 30px;
+    -fx-background-radius: 0;
+    -fx-padding: 0 10 0 10px;
+}
+
+/* tab选中时设置背景颜色 */
+.tab:selected {
+
+    -fx-border-width: 0 0 2 0px;
+    -fx-border-color: #04287E;
+}
+/* 子代选择器，Tab选中的时候选择其子元素tab-label */
+.tab:selected .tab-label {
+    -fx-text-fill: #f82827;
+}
+/* 修改顶栏的背景颜色 */
+.tab-pane>*.tab-header-area>*.tab-header-background
+{
+    -fx-background-color:#fff;
+    -fx-border-width: 0 0 1 0px;
+    -fx-border-color: #ccc;
+}
+/* 修改Tab中文本的颜色 */
+.tab-label {
+    -fx-text-fill: #666;
+}
+/* Tab选中的时候选中其边框并修改样式*/
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width:0px;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-close-button{
+    -fx-background-color: #04287E;
+}
+
+.table-cell{
+    -fx-text-fill: #666;
+}
+.table-row-cell{
+    -fx-cell-size: 30px;
+    -fx-alignment: center;
+}
+.table-row-cell:filled{
+    -fx-border-width:0 0 1 0;
+    -fx-border-color:#e3e3e3;
+}
+.table-row-cell:hover{
+     -fx-background-color: #e2eafa;
+    -fx-border-color:#e2eafa;
+}
+.table-row-cell:hover .table-cell{
+    -fx-border-color:#e2eafa;
+}
+.table-row-cell:selected{
+    -fx-background-color: #ff99cc;
+}
+.table-row-cell:selected .table-cell{
+    -fx-border-color:#ff99cc;
+     -fx-text-fill: #fff;
+}
+
+
+
+.table-view .column-drag-header,
+.tree-table-view .column-drag-header {
+    -fx-background: #FF6699;
+    -fx-background-color: #04287E;
+    -fx-border-color: #04287E;
+    -fx-text-fill: #fff;
+    -fx-opacity: 0.6;
+}
+.table-view .column-overlay,
+.tree-table-view .column-overlay {
+    -fx-background-color: #FF6699;
+    -fx-opacity: 0.3;
+}
+
+.table-view .column-header{
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-background-color:#fff;
+    -fx-pref-height: 30px;
+    -fx-border-width:0 1 1 0px;
+    -fx-border-color:#ddd;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #666;
+    -fx-font-size:12px;
+}
+.table-view .filler{
+    -fx-background-color: #fff;
+    -fx-border-width:0 0 1 0px;
+    -fx-border-color:#eee;
+}
+.titled-pane>.content{
+    -fx-background-color:#fff;
+     -fx-border-width:0px;
+}
+.titled-pane>.title{
+    -fx-background-color:#f5f5f5;
+    -fx-border-color:#d8d8d8;
+    -fx-pref-height:30px;
+}
+
+.split-pane{
+    -fx-background-color:#fff;
+    -fx-border-width: 0px;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 1px; /* 0 3 0 3 */
+    -fx-background-insets: 0;
+    -fx-background-color: #ccc;
+}
+
+/*dialog*/
+.dialog-pane {
+    -fx-background-color:#fff;
+    -fx-padding: 0;
+    -fx-graphic: none;
+}
+
+.dialog-pane > .expandable-content {
+    -fx-padding: 0.666em; /* 8px */
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-padding: 0.833em; /* 10px */
+}
+
+.dialog-pane > .content .label {
+    -fx-alignment: top-left;
+    -fx-padding: 1.333em 0.833em 0 0.833em; /* 16px 10px 0px 10px */
+}
+
+.dialog-pane > .content {
+    -fx-padding: 0.833em; /* 10 */
+}
+
+
+.alert .label{
+    -fx-text-fill:#666;
+}
+
+.tree-view{
+    -fx-background-color:#fff;
+    -fx-border-width:1 1 1 1px;
+    -fx-border-color:#ccc;
+}
+.tree-view:focused,.tree-view:selected{
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+
+}
+/*.tree-cell{*/
+/*    -fx-pref-height:25px;*/
+/*}*/
+.tree-cell:selected{
+    -fx-background-color: #FF99cc;
+    -fx-text-fill:#fff;
+}
+
+
+
+#sider_tree {
+    /*-fx-border-color: #CCCCCC;*/
+    -fx-border-width: 0 1px 0 0; /* 上 右 下 左 */
+    -fx-border-style: solid;
+    /*-fx-padding: 10px; !* 可选：添加内边距使内容不紧贴边框 *!*/
+}
+/*#sider_search {*/
+/*    -fx-pref-height: 32px; !* 设置按钮的首选宽度 *!*/
+/*    -fx-max-height: 32px; !* 设置按钮的最大高度 *!*/
+/*    -fx-min-height: 32px; !* 设置按钮的最大高度 *!*/
+
+/*}*/
+
+#menubar{
+
+    -fx-max-height: 25px; /* 设置按钮的最大高度 */
+    -fx-min-height: 25px; /* 设置按钮的最大高度 */
+    -fx-pref-height: 25px;
+}
+/* 定义一个通用的选择器，为所有指定ID的按钮在pressed状态下应用相同的样式 */
+#source_textarea_copy:pressed,
+#result_textarea_copy:pressed,
+#source_textarea_paste:pressed,
+#result_textarea_paste:pressed,
+#source_textarea_clear:pressed,
+#result_textarea_clear:pressed,
+#button_to_source:pressed {
+    -fx-translate-y: 2; /* 向下移动2个单位 */
+    -fx-translate-x: 2; /* 向右移动2个单位 */
+}
+
+.scroll-bar:vertical{
+    -fx-pref-width: 10px;
+}
+.scroll-bar:horizontal{
+    -fx-pref-height: 10px;
+}
+/* 增加垂直滚动条的宽度 */
+.scroll-bar:vertical .thumb {
+    -fx-background-color:#d9d9d9;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color:#f8f8f8;
+    -fx-background-radius: 0;
+}
+
+/* 增加水平滚动条的高度 */
+.scroll-bar:horizontal .thumb {
+    -fx-background-color:#d9d9d9;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:horizontal .track {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color:#f8f8f8;
+    -fx-background-radius: 0;
+}
+#about{
+    -fx-background-color: transparent;
+}
+#about_img{
+    -fx-border-radius: 5px;
+}
+#about_email{
+    -fx-text-fill: #d79c9c;
+
+}
+#about_user{
+    -fx-text-fill: #d38d8d;
+}

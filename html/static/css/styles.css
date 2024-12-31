@@ -1,0 +1,30 @@
+
+body {
+  padding-top: 50px;
+}
+
+.button-cen {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.container{
+  text-align: center;
+}
+
+.footer {
+  background-color: #f5f5f5;
+}
+
+.lowroe{
+	padding-bottom: 10px;
+}
+
+.leftb{
+	text-align: left;
+}
+
+.rightb{
+	text-align: right;
+}

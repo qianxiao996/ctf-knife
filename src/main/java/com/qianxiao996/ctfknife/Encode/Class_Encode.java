@@ -1,19 +1,14 @@
 package com.qianxiao996.ctfknife.Encode;
 
+
+import com.qianxiao996.ctfknife.Encode.Modules.BrainFuck.BFCodex;
+import com.qianxiao996.ctfknife.Encode.Modules.BrainFuck.Ook;
+import com.qianxiao996.ctfknife.Utils.Conn;
 import org.apache.commons.codec.binary.Hex;
-
 import org.apache.commons.lang3.StringEscapeUtils;
-
-import javax.script.Invocable;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
 import javax.script.ScriptException;
-
-
 import javafx.scene.control.TextArea;
-
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.nio.file.Files;
@@ -21,20 +16,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static com.qianxiao996.ctfknife.Utils.Conn.Get_Real_Str;
+
 public class Class_Encode extends Thread {
 
     private TextArea textarea_result;
     private String Encode_type;
     private String souce_text;
-    private String encoding;
+    private String input_encoding;
 
     private Boolean is_line;
+    private String output_encoding;
 
-    public void setValue(TextArea textarea_result, String Encode_type, String souce_text, String encoding, Boolean is_line) {
+    public void setValue(TextArea textarea_result, String Encode_type, String souce_text, String input_encoding,String output_encoding, Boolean is_line) {
         this.textarea_result = textarea_result;
-        this.Encode_type = Encode_type.replace("(", "_").replace(")", "_").replace("->", "_").replace("%", "_");
+        this.Encode_type = Encode_type.replace("(", "_").replace(")", "_").replace("->", "_").replace("%", "_").replace(" ", "_");
         this.souce_text = souce_text.trim();
-        this.encoding = encoding;
+        this.input_encoding = input_encoding;
+        this.output_encoding = output_encoding;
+
         this.is_line =is_line;
     }
 
@@ -59,10 +59,11 @@ public class Class_Encode extends Thread {
             try {
                 method = clazz.getMethod(Encode_type, String.class);
                 try{
+                    text = Get_Real_Str(text,input_encoding);
                     String result = (String) method.invoke(this, text);
                     textarea_result.appendText(result+"\r\n");
                 }catch (Exception e){
-                    textarea_result.appendText(text+"编码失败\r\n");
+                    textarea_result.appendText(text+"编码失败\r\n"+ e.getMessage());
                 }
 //                System.out.println(result);
             } catch (NoSuchMethodException  e) {
@@ -73,7 +74,7 @@ public class Class_Encode extends Thread {
         }
     }
     public String URL(String text) throws UnsupportedEncodingException {
-        return URLEncoder.encode(text, encoding);
+        return URLEncoder.encode(text, input_encoding);
     }
     public String Unicode(String text) throws UnsupportedEncodingException {
 
@@ -157,7 +158,11 @@ public class Class_Encode extends Thread {
         StringBuilder ciphertext = new StringBuilder();
         for (char i : chars) {
             int ddd= DIC_ABC.indexOf(i);
-            ciphertext.append(DIC_QWE.charAt(ddd));
+            if(ddd!=-1){
+                ciphertext.append(DIC_QWE.charAt(ddd));
+            }else{
+                ciphertext.append(i);
+            }
         }
         return ciphertext.toString();
     }
@@ -209,44 +214,16 @@ public class Class_Encode extends Thread {
     }
 
     public String JsFuck(String text) throws IOException, ScriptException, NoSuchMethodException {
-        // 获取 JavaScript 引擎
-        ScriptEngineManager engineManager = new ScriptEngineManager();
-        ScriptEngine engine = engineManager.getEngineByName("nashorn");
-        engine.eval(new FileReader("js/jsfuck.js"));
-        Invocable invocable = (Invocable) engine;
-        Object result = invocable.invokeFunction("JSFuck", text,"1");
-//        System.out.println("执行结果：" + result);
-        return (String) result;
+        return Conn.ExEjs("js/jsfuck.js","JSFuck",text);
     }
     public String JJEncode(String text) throws IOException, ScriptException, NoSuchMethodException {
-        // 获取 JavaScript 引擎
-        ScriptEngineManager engineManager = new ScriptEngineManager();
-        ScriptEngine engine = engineManager.getEngineByName("nashorn");
-        engine.eval(new FileReader("js/jjencode.js"));
-        Invocable invocable = (Invocable) engine;
-        Object result = invocable.invokeFunction("keyup", text);
-//        System.out.println("执行结果：" + result);
-        return (String) result;
+        return Conn.ExEjs("js/jjencode.js","keyup",text);
     }
     public String AAEncode(String text) throws IOException, ScriptException, NoSuchMethodException {
-        // 获取 JavaScript 引擎
-        ScriptEngineManager engineManager = new ScriptEngineManager();
-        ScriptEngine engine = engineManager.getEngineByName("nashorn");
-        engine.eval(new FileReader("js/aaencode.js"));
-        Invocable invocable = (Invocable) engine;
-        Object result = invocable.invokeFunction("aaencode", text);
-//        System.out.println("执行结果：" + result);
-        return (String) result;
+        return Conn.ExEjs("js/aaencode.js","aaencode",text);
     }
     public String jother(String text) throws IOException, ScriptException, NoSuchMethodException {
-        // 获取 JavaScript 引擎
-        ScriptEngineManager engineManager = new ScriptEngineManager();
-        ScriptEngine engine = engineManager.getEngineByName("nashorn");
-        engine.eval(new FileReader("js/jother-1.0.rc.js"));
-        Invocable invocable = (Invocable) engine;
-        Object result = invocable.invokeFunction("JotherCmd", text);
-//        System.out.println("执行结果：" + result);
-        return (String) result;
+        return Conn.ExEjs("js/jother-1.0.rc.js","JotherCmd",text);
     }
 
     public String 百家姓编码(String text) throws IOException, ScriptException, NoSuchMethodException {
@@ -331,21 +308,42 @@ public class Class_Encode extends Thread {
         }
         ArrayList<String> return_data = new ArrayList<>();
         for(int i=0;i<text.length();++i){
-            return_data.add(myNewHashMap.get(String.valueOf(text.charAt(i))));
+            String result =  myNewHashMap.get(String.valueOf(text.charAt(i)));
+            if(result!=null){
+                return_data.add(result);
+            }else{
+                return_data.add(String.valueOf(text.charAt(i)));
+            }
+//            return_data.add(myNewHashMap.get(String.valueOf(text.charAt(i))));
         }
 //        System.out.println(return_data);
         return String.join("", return_data);
     }
 
-    public String 核心价值观编码(String text) throws FileNotFoundException, ScriptException, NoSuchMethodException, UnsupportedEncodingException {
-        // 获取 JavaScript 引擎
-        ScriptEngineManager engineManager = new ScriptEngineManager();
-        ScriptEngine engine = engineManager.getEngineByName("nashorn");
-        engine.eval(new FileReader("js/hexinjiazhiguan.js"));
-        Invocable invocable = (Invocable) engine;
-        Object result = invocable.invokeFunction("valuesEncode",text);
-//        System.out.println("执行结果：" + result);
-        return (String) result;
+    public String 核心价值观编码(String text) {
+        return  Conn.ExEjs("js/hexinjiazhiguan.js","valuesEncode",text);
+    }
+
+
+    public String XXEncode(String text) {
+        return  Conn.ExEjs("js/Xxencode.js","encode",text);
+    }
+    public String UUEncode(String text) {
+        return  Conn.ExEjs("js/Uuencode.js","encode",text);
+    }
+    public String BrainFuck(String text) {
+        return  BFCodex.mTextToBF(text);
+    }
+    public String Ook(String text) {
+        return  Ook.encode(text);
+    }
+    public String Ook_Short_(String text) {
+        return  Ook.encode_Short(text);
+    }
+
+
+    public String Quoted_Printable(String text) {
+        return Conn.ExEjs_2("js/Quoted-Printable.js","escapeToQuotedPrintable",text,input_encoding);
     }
 
 }

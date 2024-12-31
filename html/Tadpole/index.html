@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>蝌蚪文加解密</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+<!-- Custom styles for this template -->
+<link href="../static/css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container">
+  <div class="starter-template">
+    <h1>蝌蚪文 加密/解密</h1>
+    <br>
+  </div>
+  <!--error-->
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-12 col-lg-8" id="alert">
+      <div class="alert alert-danger alert-dismissable hide" id="error-alert" role="alert"> Error </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+  <!--success-->
+  <div class="row  justify-content-md-center">
+    <div class="col-2" id="alert">
+      <div class="alert alert-success alert-dismissable hide" id="copy-alert" role="alert"> 复制成功 </div>
+    </div>
+  </div>
+  <!--main-->
+  <div class="row">
+    <div class="col-12 leftb">
+      <div class="form-group">
+        <textarea class="form-control" id="text-decryped" placeholder="待处理文本" rows="5"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 leftb">
+      <div class="form-group">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary" onClick="encrypt()">加密</button>
+            <button type="button" class="btn btn-warning" onClick="decrypt()">解密</button>
+        </div>
+        <button type="button"  class="btn btn-primary" onClick="copyUrl2()">复制</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 leftb">
+      <div class="form-group">
+        <textarea class="form-control" id="text-encryped" placeholder="结果" rows="7"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 leftb" >
+      <div class="card">
+        <div class="card-body" style="background-color: #F0FAFF;">
+          <p>工具简介：</p>
+          <p>蝌蚪字符是一种特殊字符编码，字符非常的酷。让你的表达出满了神秘的色彩！
+
+            比如： “我爱你” 蝌蚪编码为：“/ۡۙۨۙۤۢ۠ۢۚۨۨ۠ۖۚ۫ۘۙۙۡۡۤۖۧۖۛۨ ”, 这样表达爱意是不是很有特色！ 如果你正在爱恋一个人，向他（她）表白又不想太多人知道！快使用蝌蚪编码吧！ 可爱生动的蝌蚪文，单个纵线向上。黑点后有个萌萌的小尾巴，形似一个游动的小蝌蚪。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- /.container --> 
+<script src="../static/js/jquery.slim.min.js" ></script> 
+<script src="../static/js/bootstrap.min.js" ></script> 
+<script src="main.js"></script>
+<script>
+
+  
+</script>
+</body>
+</html>
