@@ -9,21 +9,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import org.bouncycastle.util.encoders.Hex;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Objects;
 import java.util.Random;
 
 import static com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Xor.hexStringToByteArray;
+import static com.qianxiao996.ctfknife.Encode.Class_Encode.read_file;
 
 public class Conn {
 
@@ -156,12 +161,24 @@ public class Conn {
                 return Base64.getDecoder().decode(text);
             case "Hex":
                 return hexStringToByteArray(text);
+            case "File":
+                return  read_file(text);
             case "Raw":
             default:
                 return text.getBytes();
         }
     }
-
+    public static byte[] read_file(String path) {
+        try{
+            if(! Files.exists(Paths.get(path))) {
+                return  "Error: 文件不存在！".getBytes();
+            }else{
+                return Files.readAllBytes(Paths.get(path));
+            }
+        }catch (Exception e){
+            return  ("Error: "+e.getMessage()).getBytes();
+        }
+    }
     public static String Get_Real_Str(String text, String encoding) {
         if (encoding.equals("Hex")) {
             return new String(Hex.decode(text));
@@ -171,10 +188,12 @@ public class Conn {
             return text;
         }
     }
+
     public static String Bytes_To_Str(byte[] text, String encding) {
         String  result;
         switch (encding) {
             case "UTF8":
+            case "File":
                 result = new String(text, StandardCharsets.UTF_8);
                 break;
             case "UTF16":
@@ -201,5 +220,46 @@ public class Conn {
                 break;
         }
         return result;
+    }
+    public static String File_Save_Dialog() {
+        FileChooser chooser = new FileChooser(); // 创建一个文件对话框
+        chooser.setTitle("保存文件"); // 设置文件对话框的标题
+//        chooser.setInitialDirectory(new File("E:\\")); // 设置文件对话框的初始目录
+        // 创建一个文件类型过滤器
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("所有文件", "*.*"),
+                new FileChooser.ExtensionFilter("所有图片", "*.jpg", "*.gif", "*.bmp", "*.png"));
+        // 给文件对话框添加文件类型过滤器
+        File file = chooser.showSaveDialog(null); // 显示文件保存对话框
+        if (file == null) { // 文件对象为空，表示没有选择任何文件
+            return null;
+        } else { // 文件对象非空，表示选择了某个文件
+            return file.getAbsolutePath();
+        }
+    }
+    public static String File_Open_Dialog(boolean is_img) { // 处理单击事件
+        FileChooser chooser = new FileChooser(); // 创建一个文件对话框
+        chooser.setTitle("打开文件"); // 设置文件对话框的标题
+//        chooser.setInitialDirectory(new File("E:\\")); // 设置文件对话框的初始目录
+        // 给文件对话框添加多个文件类型的过滤器
+        if(is_img){
+            chooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("所有文件", "*.*"),
+                    new FileChooser.ExtensionFilter("所有图片", "*.jpg", "*.gif", "*.bmp", "*.png"));
+        }else{
+            chooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("所有文件", "*.*"));
+        }
+
+        // 显示文件打开对话框，且该对话框支持同时选择多个文件
+        File file = chooser.showOpenDialog(null); // 显示文件打开对话框
+        if (file == null) {
+            // 文件对象为空，表示没有选择任何文件
+            return "";
+//            label.setText("未选择任何文件");
+        } else { // 文件对象非空，表示选择了某个文件
+            return file.getAbsolutePath();
+//            label.setText("准备打开的文件路径是："+file.getAbsolutePath());
+        }
     }
 }

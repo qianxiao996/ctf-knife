@@ -2,8 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,62 +16,89 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.371" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Rsa">
+<HBox prefHeight="617.0" prefWidth="969.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Rsa">
    <children>
-      <HBox>
+      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
          <children>
-            <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0" HBox.hgrow="ALWAYS">
-               <columnConstraints>
-                  <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                  <RowConstraints minHeight="10.0" />
-                  <RowConstraints minHeight="10.0" />
-               </rowConstraints>
+            <TitledPane expanded="false" text="高级选项" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox spacing="5.0">
+                     <children>
+                        <GridPane vgap="2.0">
+                           <columnConstraints>
+                              <ColumnConstraints minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Prime(P):" />
+                              <ComboBox fx:id="combo_p" prefWidth="110.0" GridPane.columnIndex="2" />
+                              <TextField fx:id="text_p" GridPane.columnIndex="1" />
+                              <Label text="Prime(Q):" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="combo_q" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextField fx:id="text_q" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="DP:" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="combo_dp" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="text_dp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="DQ:" GridPane.rowIndex="4" />
+                              <TextField fx:id="text_dq" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ComboBox fx:id="combo_dq" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label text="Qinv:" GridPane.rowIndex="5" />
+                              <TextField fx:id="text_qinv" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="combo_qinv" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label text="Private(D):" GridPane.rowIndex="6" />
+                              <ComboBox fx:id="combo_d" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <TextField fx:id="text_d" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="Modules(N)" GridPane.rowIndex="2" />
+                              <TextField fx:id="text_n" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="combo_n" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <GridPane hgap="2.0" vgap="2.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#func_encrypt" prefHeight="32.0" text="加密（需公钥）" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#func_decrypt" prefHeight="32.0" text="解密（需私钥）" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <HBox GridPane.columnIndex="1" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
-                     <children>
-                        <TextArea fx:id="public_key" prefRowCount="2" prefWidth="200.0" promptText="请输入PEM格式，以-----BEGIN PUBLIC KEY-----开头。或仅输入base64数据。" wrapText="true" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <HBox GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2">
-                     <children>
-                        <TextArea fx:id="private_key" prefRowCount="2" prefWidth="200.0" promptText="请输入PEM格式，以-----BEGIN RSA PRIVATE KEY-----开头。或仅输入base64数据。" wrapText="true" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <Button mnemonicParsing="false" onAction="#func_sign" prefHeight="32.0" text="签名（需私钥）" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onAction="#func_verify" prefHeight="32.0" text="验签（需公钥）" GridPane.columnIndex="2" />
-                  <Label minHeight="30.0" text="Public Key:">
+                  <Label text="Public Key:">
                      <padding>
                         <Insets right="5.0" />
                      </padding>
                   </Label>
-                  <Label minHeight="30.0" text="Private Key:" GridPane.rowIndex="2">
+                  <TextArea fx:id="text_pub" prefHeight="0.0" prefRowCount="2" prefWidth="464.0" promptText="请输入PEM格式，以-----BEGIN PUBLIC KEY-----开头。或仅输入base64、Hex数据。" wrapText="true" GridPane.columnIndex="1" GridPane.rowSpan="2" />
+                  <ComboBox fx:id="combo_pub" prefWidth="110.0" GridPane.rowIndex="1" />
+                  <Label text="Private Key:" GridPane.rowIndex="2">
                      <padding>
                         <Insets right="5.0" />
                      </padding>
                   </Label>
-                  <Label text="RSA公钥：" GridPane.rowIndex="1" />
-                  <Label text="RSA私钥：" GridPane.rowIndex="3" />
+                  <TextArea fx:id="text_pri" prefHeight="0.0" prefRowCount="2" prefWidth="462.0" promptText="请输入PEM格式，以-----BEGIN RSA PRIVATE KEY-----开头。或仅输入base64、Hex数据。" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+                  <ComboBox fx:id="combo_pri" prefWidth="110.0" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
                </children>
             </GridPane>
-         </children>
-         <padding>
-            <Insets left="5.0" right="5.0" />
-         </padding>
-      </HBox>
-      <VBox spacing="3.0" VBox.vgrow="ALWAYS">
-         <children>
             <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <Label alignment="TOP_LEFT" text="源文本：" HBox.hgrow="ALWAYS" />
-                  <Region HBox.hgrow="ALWAYS" />
+                  <Label alignment="TOP_LEFT" text="明文文本：" HBox.hgrow="ALWAYS" />
+                  <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
                   <Button fx:id="source_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" text="复制" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets />
@@ -86,19 +117,16 @@
                         <Tooltip text="清空" />
                      </tooltip>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#func_generateKey" text="生成密钥对" />
+                  <Label text="编码" />
+                  <ComboBox fx:id="mingwen_encoding" prefWidth="110.0" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#func_text_mingwen_open_file" prefWidth="85.0" text="载入文件" textAlignment="CENTER" />
                </children>
             </HBox>
-            <TextArea fx:id="TextArea_Source" promptText="加密明文 | 解密密文 | 签名明文 | 验签明文" wrapText="true" VBox.vgrow="ALWAYS" />
+            <TextArea fx:id="TextArea_Source" prefHeight="51.0" prefWidth="518.0" promptText="加密明文" wrapText="true" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" spacing="5.0">
                <children>
-                  <Label alignment="TOP_LEFT" contentDisplay="TOP" text="结果：" HBox.hgrow="ALWAYS" />
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="button_to_source" alignment="TOP_LEFT" mnemonicParsing="false" text="转源" textAlignment="CENTER">
-                     <tooltip>
-                        <Tooltip text="转源文本" />
-                     </tooltip>
-                  </Button>
+                  <Label alignment="TOP_LEFT" contentDisplay="TOP" text="密文文本：" HBox.hgrow="ALWAYS" />
+                  <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
                   <Button fx:id="result_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" text="复制" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets />
@@ -117,16 +145,35 @@
                         <Tooltip text="清空" />
                      </tooltip>
                   </Button>
+                  <Label text="编码" />
+                  <ComboBox fx:id="miwen_encoding" prefWidth="110.0" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#func_text_miwen_open_file" prefWidth="85.0" text="载入文件" textAlignment="CENTER" />
                </children>
             </HBox>
-            <TextArea fx:id="TextArea_Result" wrapText="true" VBox.vgrow="ALWAYS" />
+            <TextArea fx:id="TextArea_Result" prefHeight="62.0" prefWidth="518.0" promptText="解密密文" wrapText="true" VBox.vgrow="ALWAYS" />
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
+      </VBox>
+      <VBox maxWidth="250.0" minWidth="170.0" prefHeight="608.0" prefWidth="170.0" spacing="5.0" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="250.0" minWidth="170.0" spacing="5.0">
+               <children>
+                  <Label maxWidth="20.0" minWidth="20.0" prefWidth="20.0" text="E:" />
+                  <ComboBox fx:id="combo_e" minWidth="105.0" prefWidth="105.0" HBox.hgrow="NEVER" />
+                  <TextField fx:id="text_e" alignment="TOP_LEFT" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label alignment="TOP_LEFT" text="功能区（双击使用）" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#func_clear" text="清空" />
+               </children>
+            </HBox>
+            <ListView fx:id="listview_go" maxWidth="250.0" minWidth="170.0" VBox.vgrow="ALWAYS" />
+         </children>
       </VBox>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
-</VBox>
+</HBox>

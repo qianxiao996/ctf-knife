@@ -345,6 +345,36 @@ public class Class_Encode extends Thread {
     public String Quoted_Printable(String text) {
         return Conn.ExEjs_2("js/Quoted-Printable.js","escapeToQuotedPrintable",text,input_encoding);
     }
+    public String Hex_Base64(String text) {
+        try{
+            byte[] hex_byte = Hex.decodeHex(text);
+            return   new String(Base64.getEncoder().encode(hex_byte),output_encoding);
+        } catch (Exception e) {
+            return  e.getMessage();
+        }
+    }
+    public String 文件_Hex(String text) {
+        try{
+            byte[] source_byte = read_file(text);
+            if(source_byte==null){
+                return "文件不存在！";
+            }
+            return new String(Hex.encodeHex(source_byte));
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+    public String 文件_Base64(String text) {
+        try{
+            byte[] source_byte = read_file(text);
+            if(source_byte==null){
+                return "文件不存在！";
+            }
+            return new String(Base64.getEncoder().encode(source_byte),output_encoding);
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
 
 }
 

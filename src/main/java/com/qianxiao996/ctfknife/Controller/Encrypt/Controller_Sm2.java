@@ -139,22 +139,22 @@ public class Controller_Sm2 {
                 return;
             }
             String input_encoding_str =input_encoding.getValue();
-            byte[] data;
-            if (Objects.equals(input_encoding_str, "Raw")){
-                data= text_source.getBytes();
-            } else if (Objects.equals(input_encoding_str, "Hex")) {
-                data= Hex.decode(text_source);
-            } else if (Objects.equals(input_encoding_str, "Base64")) {
-                data= Base64.decode(text_source);
-
-            } else{
-                data =text_source.getBytes();
-            }
+            byte[] data = Conn.Str_To_Bytes(input_encoding_str,text_source);
+//            if (Objects.equals(input_encoding_str, "Raw")){
+//                data= text_source.getBytes();
+//            } else if (Objects.equals(input_encoding_str, "Hex")) {
+//                data= Hex.decode(text_source);
+//            } else if (Objects.equals(input_encoding_str, "Base64")) {
+//                data= Base64.decode(text_source);
+//
+//            } else{
+//                data =text_source.getBytes();
+//            }
             String pri_key=private_key.getText();
             PrivateKey privateKey;
-            if(Objects.equals(pub_encoding.getValue(), "Hex")){
+            if(Objects.equals(pri_encoding.getValue(), "Hex")){
                 privateKey = hexToECPrivateKey(pri_key);
-            } else if (Objects.equals(pub_encoding.getValue(), "Base64")) {
+            } else if (Objects.equals(pri_encoding.getValue(), "Base64")) {
                 privateKey = base64ToECPrivateKey(pri_key);
             }else {
                 TextArea_Result.setText("私钥格式错误");
@@ -181,15 +181,17 @@ public class Controller_Sm2 {
                 TextArea_Result.setText(e.getMessage());
             }
             String out_encoding_str =output_encoding.getValue();
-            if(Objects.equals(out_encoding_str, "Raw")){
-                TextArea_Result.setText(new  String(arrayOfByte2));
-            }else if(Objects.equals(out_encoding_str, "Hex")){
-                TextArea_Result.setText(Hex.toHexString(arrayOfByte2));
-            } else if (Objects.equals(out_encoding_str, "Base64")) {
-                TextArea_Result.setText(Base64.toBase64String(arrayOfByte2));
-            }else{
-                TextArea_Result.setText(new String(arrayOfByte2));
-            }
+            String result  = Conn.Bytes_To_Str(arrayOfByte2,out_encoding_str);
+            TextArea_Result.setText(result);
+//            if(Objects.equals(out_encoding_str, "Raw")){
+//                TextArea_Result.setText(new  String(arrayOfByte2));
+//            }else if(Objects.equals(out_encoding_str, "Hex")){
+//                TextArea_Result.setText(Hex.toHexString(arrayOfByte2));
+//            } else if (Objects.equals(out_encoding_str, "Base64")) {
+//                TextArea_Result.setText(Base64.toBase64String(arrayOfByte2));
+//            }else{
+//                TextArea_Result.setText(new String(arrayOfByte2));
+//            }
         }catch (Exception e){
             TextArea_Result.setText(e.getMessage());
         }
@@ -205,17 +207,17 @@ public class Controller_Sm2 {
                 return;
             }
             String input_encoding_str =input_encoding.getValue();
-            byte[] data;
-            if (Objects.equals(input_encoding_str, "Raw")){
-                data= text_source.getBytes();
-            } else if (Objects.equals(input_encoding_str, "Hex")) {
-                data= Hex.decode(text_source);
-            } else if (Objects.equals(input_encoding_str, "Base64")) {
-                data= Base64.decode(text_source);
-
-            } else{
-                data =text_source.getBytes();
-            }
+            byte[] data = Conn.Str_To_Bytes(input_encoding_str,text_source);
+//            if (Objects.equals(input_encoding_str, "Raw")){
+//                data= text_source.getBytes();
+//            } else if (Objects.equals(input_encoding_str, "Hex")) {
+//                data= Hex.decode(text_source);
+//            } else if (Objects.equals(input_encoding_str, "Base64")) {
+//                data= Base64.decode(text_source);
+//
+//            } else{
+//                data =text_source.getBytes();
+//            }
             String pub_key=public_key.getText();
             PublicKey publicKey;
             if(Objects.equals(pub_encoding.getValue(), "Hex")){
@@ -251,15 +253,17 @@ public class Controller_Sm2 {
                 TextArea_Result.setText(e.getMessage());
             }
             String out_encoding_str =output_encoding.getValue();
-            if(Objects.equals(out_encoding_str, "Raw")){
-                TextArea_Result.setText(new  String(arrayOfByte2));
-            }else if(Objects.equals(out_encoding_str, "Hex")){
-                TextArea_Result.setText(Hex.toHexString(arrayOfByte2));
-            } else if (Objects.equals(out_encoding_str, "Base64")) {
-                TextArea_Result.setText(Base64.toBase64String(arrayOfByte2));
-            }else{
-                TextArea_Result.setText(new String(arrayOfByte2));
-            }
+            String result = Conn.Bytes_To_Str(arrayOfByte2,out_encoding_str);
+            TextArea_Result.setText(result);
+//            if(Objects.equals(out_encoding_str, "Raw")){
+//                TextArea_Result.setText(new  String(arrayOfByte2));
+//            }else if(Objects.equals(out_encoding_str, "Hex")){
+//                TextArea_Result.setText(Hex.toHexString(arrayOfByte2));
+//            } else if (Objects.equals(out_encoding_str, "Base64")) {
+//                TextArea_Result.setText(Base64.toBase64String(arrayOfByte2));
+//            }else{
+//                TextArea_Result.setText(new String(arrayOfByte2));
+//            }
         }catch (Exception e){
             TextArea_Result.setText(e.getMessage());
         }
@@ -321,17 +325,17 @@ public class Controller_Sm2 {
                 TextArea_Result.setText("输入为空！");
                 return;
             }
-            byte[] data;
-            if (Objects.equals(input_encoding_str, "Raw")){
-                data= text_source.getBytes();
-            } else if (Objects.equals(input_encoding_str, "Hex")) {
-                data= Hex.decode(text_source);
-            } else if (Objects.equals(input_encoding_str, "Base64")) {
-                data= Base64.decode(text_source);
-
-            } else{
-                data =text_source.getBytes();
-            }
+            byte[] data = Conn.Str_To_Bytes(input_encoding_str,text_source);
+//            if (Objects.equals(input_encoding_str, "Raw")){
+//                data= text_source.getBytes();
+//            } else if (Objects.equals(input_encoding_str, "Hex")) {
+//                data= Hex.decode(text_source);
+//            } else if (Objects.equals(input_encoding_str, "Base64")) {
+//                data= Base64.decode(text_source);
+//
+//            } else{
+//                data =text_source.getBytes();
+//            }
             String pri_key_str = private_key.getText();
             String pri_encoding_str = pri_encoding.getValue();
             PrivateKey pri_key = null;
@@ -515,26 +519,27 @@ public class Controller_Sm2 {
     }
     private void verify_sign(String pub_key,String message,String  signature,String sign_encoding) {
         try{
-            byte[] sign_text_bytes = new byte[0];
-            if(Objects.equals(sign_encoding, "Hex")){
-                sign_text_bytes =Hex.decode(signature);
-            } else if (Objects.equals(sign_encoding, "Base64")) {
-                sign_text_bytes = Base64.decode(signature);
-            } else if (Objects.equals(sign_encoding, "Raw")) {
-                sign_text_bytes = signature.getBytes();
-            }else{
-                sign_text_bytes = signature.getBytes();
-            }
-            byte[] message_bytes = new byte[0];
-            if(Objects.equals(input_encoding.getValue(), "Hex")){
-                message_bytes = Hex.decode(message);
-            } else if(Objects.equals(input_encoding.getValue(), "Base64")){
-                message_bytes = Base64.decode(message);
-            } else if (Objects.equals(input_encoding.getValue(), "Raw")) {
-                message_bytes = message.getBytes(StandardCharsets.UTF_8);
-            }else{
-                message_bytes = message.getBytes();
-            }
+            byte[] sign_text_bytes = Conn.Str_To_Bytes(sign_encoding,signature);
+//            if(Objects.equals(sign_encoding, "Hex")){
+//                sign_text_bytes =Hex.decode(signature);
+//            } else if (Objects.equals(sign_encoding, "Base64")) {
+//                sign_text_bytes = Base64.decode(signature);
+//            } else if (Objects.equals(sign_encoding, "Raw")) {
+//                sign_text_bytes = signature.getBytes();
+//            }else{
+//                sign_text_bytes = signature.getBytes();
+//            }
+            byte[] message_bytes = Conn.Str_To_Bytes(input_encoding.getValue(),message);
+//            byte[] message_bytes = new byte[0];
+//            if(Objects.equals(input_encoding.getValue(), "Hex")){
+//                message_bytes = Hex.decode(message);
+//            } else if(Objects.equals(input_encoding.getValue(), "Base64")){
+//                message_bytes = Base64.decode(message);
+//            } else if (Objects.equals(input_encoding.getValue(), "Raw")) {
+//                message_bytes = message.getBytes(StandardCharsets.UTF_8);
+//            }else{
+//                message_bytes = message.getBytes();
+//            }
             PublicKey publicKey;
             if(Objects.equals(pub_encoding.getValue(), "Hex")){
                 publicKey = hexToECPublicKey(pub_key);

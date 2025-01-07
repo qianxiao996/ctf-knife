@@ -23,16 +23,17 @@
     -fx-background-color: black;
     -fx-border-width: 0 0 1 0px;
     -fx-border-color: #888;
+    /*-fx-pref-height: 25px;*/
 }
 .menu-bar .menu{
-     /*-fx-pref-height: 30px;*/
-    -fx-padding: 4 10 4 10;
+     /*-fx-pref-height: 25px;*/
+    /*-fx-padding: 4 10 4 10;*/
 }
 .menu-bar .menu-item {
-     /*-fx-pref-height: 30px;*/
+     /*-fx-pref-height: 25px;*/
 }
 .menu-item {
-      /*-fx-pref-height: 30px;*/
+      /*-fx-pref-height: 25px;*/
     -fx-background-color: black;
 }
 
@@ -91,7 +92,7 @@
     -fx-background-radius: 0 ;
     -fx-border-color: #888;
     -fx-text-fill: #fff;
-    -fx-pref-height: 25px;
+    /*-fx-pref-height: 25px;*/
 }
 .text-field:focused,.text-area:focused{
     -fx-background-color: black;
@@ -154,7 +155,7 @@
 /* 修改Tab的背景颜色 */
 .tab {
     -fx-background-color: black;
-    -fx-pref-height: 30px;
+    /*-fx-pref-height: 25px;*/
     -fx-background-radius: 0;
     -fx-padding: 0 10 0 10px;
 }
@@ -225,7 +226,7 @@
     -fx-background-color: #fafafa;
     -fx-border-width:0 1 1 0px;
     -fx-border-color:#eee;
-    -fx-pref-height: 30px;
+    /*-fx-pref-height: 30px;*/
 }
 .table-view .column-header .label{
     -fx-text-fill: #666;
@@ -234,17 +235,20 @@
 .table-view .filler{
     -fx-background-color: #fafafa;
     -fx-border-width:0 0 1 0px;
-    -fx-border-color:#eee;
+    -fx-border-color:#888;
 }
-
+.titled-pane{
+    -fx-border-color:#888;
+    -fx-text-fill: #fff;
+}
 .titled-pane>.content{
-    -fx-background-color:#fff;
+    -fx-background-color:black;
      -fx-border-width:0px;
 }
 .titled-pane>.title{
-    -fx-background-color:#f5f5f5;
-    -fx-border-color:#d8d8d8;
-    -fx-pref-height:30px;
+    -fx-background-color:black;
+    -fx-border-color:black;
+    /*-fx-pref-height:30px;*/
 }
 
 .split-pane{
@@ -290,7 +294,7 @@
 .tree-view{
     -fx-background-color:black;
     -fx-border-width:1 0 0 0px;
-    -fx-border-color:#888;
+    -fx-border-color: #888;
 }
 .tree-view:focused,.tree-view:selected{
     -fx-background-insets: 0;
@@ -362,18 +366,17 @@
     -fx-border-style: solid;
     /*-fx-padding: 10px; !* 可选：添加内边距使内容不紧贴边框 *!*/
 }
-/*#sider_search {*/
-/*    -fx-pref-height: 32px; !* 设置按钮的首选宽度 *!*/
-/*    -fx-max-height: 32px; !* 设置按钮的最大高度 *!*/
-/*    -fx-min-height: 32px; !* 设置按钮的最大高度 *!*/
+#sider_search {
+    /*-fx-pref-height: 25px; !* 设置按钮的首选宽度 *!*/
+    /*-fx-max-height: 25px; !* 设置按钮的最大高度 *!*/
+    /*-fx-min-height: 25px; !* 设置按钮的最大高度 *!*/
 
-/*}*/
+}
 
 #menubar{
-
-    -fx-max-height: 25px; /* 设置按钮的最大高度 */
-    -fx-min-height: 25px; /* 设置按钮的最大高度 */
-    -fx-pref-height: 25px;
+    /*-fx-max-height: 25px; !* 设置按钮的最大高度 *!*/
+    /*-fx-min-height: 25px; !* 设置按钮的最大高度 *!*/
+    /*-fx-pref-height: 25px;*/
 }
 /* 定义一个通用的选择器，为所有指定ID的按钮在pressed状态下应用相同的样式 */
 #source_textarea_copy:pressed,

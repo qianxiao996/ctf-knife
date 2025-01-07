@@ -21,7 +21,7 @@
             <HBox>
                <children>
                   <TextField fx:id="text_key" />
-                  <ComboBox fx:id="key_encoding" minHeight="32.0" prefWidth="110.0" />
+                  <ComboBox fx:id="key_encoding" prefWidth="110.0" />
                </children>
             </HBox>
             <Button fx:id="source_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" text="复制" textAlignment="CENTER">

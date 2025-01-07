@@ -85,8 +85,6 @@ public class Class_Decode_go extends Thread {
                 }
             }
             textarea_result.appendText("\r\n");
-
-
         }
 
         button.setDisable(false);

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.371" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Des">
+<VBox alignment="CENTER_LEFT" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Des">
    <children>
       <HBox>
          <children>
@@ -29,38 +29,38 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Label text="模式" GridPane.columnIndex="4" />
-                  <ComboBox fx:id="mode" minHeight="32.0" minWidth="150.0" prefWidth="190.0" GridPane.columnIndex="5" />
-                  <Button mnemonicParsing="false" onAction="#func_encrypt" prefHeight="32.0" prefWidth="50.0" text="加密" GridPane.columnIndex="6" />
+                  <ComboBox fx:id="mode" minWidth="150.0" prefWidth="190.0" GridPane.columnIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#func_encrypt" prefWidth="50.0" text="加密" GridPane.columnIndex="6" />
                   <Label text="填充" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="padding_combox" minHeight="32.0" minWidth="150.0" prefWidth="190.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#func_decrypt" prefHeight="32.0" prefWidth="50.0" text="解密" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="input_encoding" minHeight="32.0" prefWidth="110.0" GridPane.columnIndex="3" />
-                  <ComboBox fx:id="output_encoding" minHeight="32.0" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="padding_combox" minWidth="150.0" prefWidth="190.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#func_decrypt" prefWidth="50.0" text="解密" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="input_encoding" prefWidth="110.0" GridPane.columnIndex="3" />
+                  <ComboBox fx:id="output_encoding" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Label text="输入编码" GridPane.columnIndex="2" />
                   <Label text="输出编码" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <HBox GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="key_text" maxHeight="32.0" minHeight="32.0" promptText="请输入Key" HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="key_encoding" minHeight="32.0" prefWidth="110.0" />
+                        <TextField fx:id="key_text" promptText="请输入Key" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="key_encoding" prefWidth="110.0" />
                      </children>
                   </HBox>
                   <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="iv_text" maxHeight="32.0" minHeight="32.0" promptText="请输入IV" HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="iv_encoding" minHeight="32.0" prefWidth="110.0" />
+                        <TextField fx:id="iv_text" promptText="请输入IV" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="iv_encoding" prefWidth="110.0" />
                      </children>
                   </HBox>
-                  <Label minHeight="30.0" minWidth="30.0" text="Key:">
+                  <Label text="Key:">
                      <padding>
                         <Insets right="5.0" />
                      </padding>
                   </Label>
-                  <Label minHeight="30.0" minWidth="30.0" text="IV:" GridPane.rowIndex="1">
+                  <Label text="IV:" GridPane.rowIndex="1">
                      <padding>
                         <Insets right="5.0" />
                      </padding>

@@ -1,5 +1,5 @@
 package com.qianxiao996.ctfknife.Controller;
-
+import javafx.scene.input.KeyCode;
 import cn.hutool.core.swing.clipboard.ClipboardUtil;
 import com.qianxiao996.ctfknife.Base.Class_Base_Decode;
 import com.qianxiao996.ctfknife.Base.Class_Base_Decode_go;
@@ -13,6 +13,7 @@ import com.qianxiao996.ctfknife.Encode.Class_Encode;
 import com.qianxiao996.ctfknife.Encrypt.Class_Decrypt;
 import com.qianxiao996.ctfknife.Encrypt.Class_Encrypt;
 import com.qianxiao996.ctfknife.Tools.Class_Tools;
+import com.qianxiao996.ctfknife.Utils.Conn;
 import com.qianxiao996.ctfknife.WebView.Class_Html;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -25,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -34,6 +36,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -57,6 +60,8 @@ import static com.qianxiao996.ctfknife.Utils.Conn.set_button_icon;
 
 public class Ctfknife_Controller {
 
+    @FXML
+    private Tab tab_996;
     public  Menu encode_zaixian_tools;
     public  Menu encode_plugins;
     public Map<TreeItem<String>,EventHandler<ActionEvent>> Global_Click_event = new HashMap<>(); //所有的ree点击事件
@@ -156,7 +161,7 @@ public class Ctfknife_Controller {
         set_button_icon(source_textarea_clear,"img/clear.png");
         set_button_icon(result_textarea_clear,"img/clear.png");
         set_button_icon(button_to_source,"img/to.png");
-
+        tab_996.setContextMenu(get_ContextMenu(tab_996));
 
     }
 
@@ -444,24 +449,25 @@ public class Ctfknife_Controller {
             return ;
         }
         String source_text = selectedTextArea_Source.getText();
-//        ArrayList<String> open_file_list = new ArrayList<>();
-        ArrayList<String> open_file_list = new ArrayList<>(Arrays.asList("Hex->图片","Base64->图片"));
+        if(source_text.isEmpty()) {
+            f_alert_informationDialog("提示", "","请输入源文本！");
+            return;
+        }
+        ArrayList<String> open_file_list = new ArrayList<>(Arrays.asList("Hex->图片","Base64->图片","Hex->文件","Base64->文件"));
         if(open_file_list.contains(encode_type)){
-            String img_path = File_Save_Dialog();
+            String img_path = Conn.File_Save_Dialog();
+            if (img_path == null || img_path.isEmpty()) {
+                return;
+            }
             selectedTextArea_Result.setText(img_path);
         }
-
         Boolean is_line = encode_line.isSelected();
         //设置文本
-        if(!source_text.isEmpty()){
-            Class_Decode myThread = new Class_Decode();
-            myThread.setValue(selectedTextArea_Result,encode_type,source_text,input_encoding,output_encoding,is_line);
-            Thread t = new Thread(myThread);
-            t.setDaemon(true);
-            t.start();
-        }else{
-            f_alert_informationDialog("提示", "","请输入源文本！");
-        }
+        Class_Decode myThread = new Class_Decode();
+        myThread.setValue(selectedTextArea_Result,encode_type,source_text,input_encoding,output_encoding,is_line);
+        Thread t = new Thread(myThread);
+        t.setDaemon(true);
+        t.start();
 
     }
     @FXML
@@ -507,6 +513,7 @@ public class Ctfknife_Controller {
         if(temp_vbox!=null){
             // 创建新的Tab并添加WebView到其中
             Tab temp_tab = new Tab(html_type, temp_vbox);
+            temp_tab.setContextMenu(get_ContextMenu(temp_tab));
             encode_tab.getTabs().add(temp_tab);
             encode_tab.getSelectionModel().select(temp_tab);
             // 添加关闭Tab时的事件处理
@@ -563,7 +570,7 @@ public class Ctfknife_Controller {
 
     @FXML
     void func_encode_base_go(ActionEvent event) {
-        ArrayList<String> encode_type = new ArrayList<>(Arrays.asList("Base16","Base32","Base36","Base58","Base62","Base64","Base85","Base91","Base92"));
+        ArrayList<String> encode_type = new ArrayList<>(Arrays.asList("Base16","Base32","Base36","Base58","Base62","Base64","Base85","Base91","Base92","Base100"));
         Object[] result_obj = get_tab_textarea_obj();
         TextArea selectedTextArea_Source = (TextArea) result_obj[0];
         TextArea selectedTextArea_Result = (TextArea) result_obj[1];
@@ -774,9 +781,9 @@ public class Ctfknife_Controller {
         }
         boolean is_line = encode_line.isSelected();
 //        ArrayList<String> open_file_list = new ArrayList<>();
-        ArrayList<String> open_file_list = new ArrayList<>(Arrays.asList("图片->Hex","图片->Base64"));
+        ArrayList<String> open_file_list = new ArrayList<>(Arrays.asList("图片->Hex","图片->Base64","文件->Hex","文件->Base64"));
         if(open_file_list.contains(encode_type)){
-            String img_path = File_Open_Dialog();
+            String img_path = Conn.File_Open_Dialog(true);
             if(img_path.isEmpty()){
                 return;
             }else{
@@ -840,30 +847,126 @@ public class Ctfknife_Controller {
         return result;
     }
     public static void f_alert_informationDialog(String title,String p_header, String p_message){
-        Alert _alert = new Alert(Alert.AlertType.INFORMATION);
-        _alert.setTitle(title);
-        // 设置图标
-        Image image =new Image(Objects.requireNonNull(CtfknifeApplication.class.getResourceAsStream("img/ico.png")));
-        Stage stage = (Stage) _alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(image);  // 设置标题栏图标
-//        _alert.getDialogPane().setGraphic(new ImageView(image));
+        Platform.runLater(() -> {
+            Alert _alert = new Alert(Alert.AlertType.INFORMATION);
+            _alert.setTitle(title);
+            // 设置图标
+            Image image =new Image(Objects.requireNonNull(CtfknifeApplication.class.getResourceAsStream("img/ico.png")));
+            Stage stage = (Stage) _alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(image);  // 设置标题栏图标
+    //        _alert.getDialogPane().setGraphic(new ImageView(image));
 
-        // 添加样式表
-        _alert.getDialogPane().getStylesheets().add(
-                Objects.requireNonNull(CtfknifeApplication.class.getResource(Style_Css)).toExternalForm()
-        );
-        _alert.setHeaderText(p_header);
-        _alert.setContentText(p_message);
-//        _alert.initOwner();
-        _alert.show();
+            // 添加样式表
+            _alert.getDialogPane().getStylesheets().add(
+                    Objects.requireNonNull(CtfknifeApplication.class.getResource(Style_Css)).toExternalForm()
+            );
+            _alert.setHeaderText(p_header);
+            _alert.setContentText(p_message);
+    //        _alert.initOwner();
+            _alert.show();
+        });
     }
-    //双击添加tab pane
+
+    private void renameTab(Tab tab) {
+        // 如果 Tab 已经有 TextField，则不处理重复点击事件
+        if (tab.getGraphic() instanceof TextField) return;
+
+        // 记录原始文本以便取消操作时恢复
+        String originalText = tab.getText();
+
+        // 创建一个新的 TextField 并设置初始文本为当前 Tab 的文本
+        TextField textField = new TextField(originalText);
+
+        // 设置 TextField 样式以匹配 Tab 标题外观（可选）
+        textField.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+
+        // 将 TextField 设置为 Tab 的图形属性，覆盖默认文本
+        tab.setGraphic(textField);
+        tab.setText(""); // 清空原始文本，使 TextField 可见
+
+        // 焦点自动移到 TextField，并选中所有文本
+        textField.requestFocus();
+        textField.selectAll();
+
+        // 监听 Enter 键以确认新名称
+        textField.setOnAction(event -> {
+            tab.setText(textField.getText());
+            tab.setGraphic(null); // 移除图形属性，恢复默认显示
+        });
+
+        // 监听 Escape 键以取消重命名
+        textField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                tab.setText(originalText);
+                tab.setGraphic(null); // 移除图形属性，恢复默认显示
+            }
+        });
+
+        // 监听失去焦点事件
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // 当 TextField 失去焦点时
+                tab.setText(textField.getText());
+                tab.setGraphic(null); // 移除图形属性，恢复默认显示
+            }
+        });
+
+    }
+    private ContextMenu get_ContextMenu(Tab this_tab){
+        // 创建右键菜单项
+        MenuItem menuItem_close_this = new MenuItem("关闭");
+        MenuItem menuItem_rename = new MenuItem("重命名");
+        MenuItem menuItem_close_left = new MenuItem("关闭左侧标签页");
+        MenuItem menuItem_close_right = new MenuItem("关闭右侧标签页");
+        MenuItem menuItem_close_other = new MenuItem("关闭其他标签页");
+
+        // 为菜单项添加事件处理程序（可选）
+        menuItem_rename.setOnAction(e -> {
+            if (this_tab != null) {
+                renameTab(this_tab);
+            }
+        });
+        menuItem_close_left.setOnAction(e -> {
+            if (this_tab != null) {
+                int selectedIndex = encode_tab.getTabs().indexOf(this_tab);
+                if (selectedIndex > 0) {
+                    // 移除所有在选定 Tab 左侧的 Tabs
+                    encode_tab.getTabs().remove(0, selectedIndex);
+                }
+            }
+        });
+        menuItem_close_right.setOnAction(e -> {
+            if (this_tab != null) {
+                int selectedIndex = encode_tab.getTabs().indexOf(this_tab);
+                if (selectedIndex >= 0 && selectedIndex < encode_tab.getTabs().size() - 1) {
+                    // 移除所有在选定 Tab 右侧的 Tabs
+                    encode_tab.getTabs().remove(selectedIndex + 1, encode_tab.getTabs().size());
+                }
+            }
+        });
+        menuItem_close_other.setOnAction(e -> {
+            if (this_tab != null) {
+                // 创建一个新的 Tabs 列表，只包含当前选中的 Tab
+                encode_tab.getTabs().retainAll(this_tab);
+            }
+        });
+        menuItem_close_this.setOnAction(e -> {
+            if(encode_tab.getTabs().size()<=1){
+                f_alert_informationDialog("关闭", "","需要保留一个页面哦！");
+            }else{
+                encode_tab.getTabs().remove(this_tab);
+            }
+        });
+
+
+
+        // 创建上下文菜单并添加菜单项
+        return new ContextMenu(menuItem_close_this,menuItem_rename,menuItem_close_left,menuItem_close_right,menuItem_close_other);
+    }
     @FXML
     void tab_add_pane(MouseEvent event) {
         if (event.getClickCount()==2) {
             add_tab_();
         }
-
     }
 
     public void add_tab_() {
@@ -925,8 +1028,10 @@ public class Ctfknife_Controller {
 
             // 创建新的Tab并添加WebView到其中
             Tab temp_tab = new Tab(tab_name,fxmlNode);
+            temp_tab.setContextMenu(get_ContextMenu(temp_tab));
             encode_tab.getTabs().add(temp_tab);
             encode_tab.getSelectionModel().select(temp_tab);
+
             // 添加关闭Tab时的事件处理
             temp_tab.setOnCloseRequest(this::encode_close_tab);
         }catch (Exception e){
@@ -935,41 +1040,8 @@ public class Ctfknife_Controller {
     }
 
 
-    public String File_Open_Dialog() { // 处理单击事件
-        FileChooser chooser = new FileChooser(); // 创建一个文件对话框
-        chooser.setTitle("打开文件"); // 设置文件对话框的标题
-//        chooser.setInitialDirectory(new File("E:\\")); // 设置文件对话框的初始目录
-        // 给文件对话框添加多个文件类型的过滤器
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("所有文件", "*.*"),
-                new FileChooser.ExtensionFilter("所有图片", "*.jpg", "*.gif", "*.bmp", "*.png"));
-        // 显示文件打开对话框，且该对话框支持同时选择多个文件
-        File file = chooser.showOpenDialog(null); // 显示文件打开对话框
-        if (file == null) {
-            // 文件对象为空，表示没有选择任何文件
-            return "";
-//            label.setText("未选择任何文件");
-        } else { // 文件对象非空，表示选择了某个文件
-            return file.getAbsolutePath();
-//            label.setText("准备打开的文件路径是："+file.getAbsolutePath());
-        }
-    }
-    public static String File_Save_Dialog() {
-        FileChooser chooser = new FileChooser(); // 创建一个文件对话框
-        chooser.setTitle("保存文件"); // 设置文件对话框的标题
-//        chooser.setInitialDirectory(new File("E:\\")); // 设置文件对话框的初始目录
-        // 创建一个文件类型过滤器
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("所有文件", "*.*"),
-                new FileChooser.ExtensionFilter("所有图片", "*.jpg", "*.gif", "*.bmp", "*.png"));
-        // 给文件对话框添加文件类型过滤器
-        File file = chooser.showSaveDialog(null); // 显示文件保存对话框
-        if (file == null) { // 文件对象为空，表示没有选择任何文件
-            return null;
-        } else { // 文件对象非空，表示选择了某个文件
-            return file.getAbsolutePath();
-        }
-    }
+
+
     //type encode_base64,decode_base64
     public void Open_One_Ui(String title,String label_text,String type,TextArea selectedTextArea_Result,String encode_type,String source_text) throws IOException {
         Stage stage = new Stage();
@@ -1172,8 +1244,8 @@ public class Ctfknife_Controller {
     }
 
     private void change_sider(Boolean  show_sider) {
-        sider_vbox.setVisible(show_sider);
-        sider_vbox.setManaged(show_sider);
+//        sider_vbox.setVisible(show_sider);
+//        sider_vbox.setManaged(show_sider);
         sider_search.setVisible(show_sider);
         sider_search.setManaged(show_sider);
         sider_tree.setVisible(show_sider);
@@ -1240,11 +1312,13 @@ public class Ctfknife_Controller {
             Node fxmlNode = loader.load();
             // 创建新的Tab并添加WebView到其中
             Tab temp_tab = new Tab(tag_name, fxmlNode);
+            temp_tab.setContextMenu(get_ContextMenu(temp_tab));
             encode_tab.getTabs().add(temp_tab);
             encode_tab.getSelectionModel().select(temp_tab);
             // 添加关闭Tab时的事件处理
             temp_tab.setOnCloseRequest(this::encode_close_tab);
         }catch (Exception e){
+            e.printStackTrace();
             f_alert_informationDialog("提示", "", "打开界面错误！"+e.getMessage());
         }
 
@@ -1267,6 +1341,7 @@ public class Ctfknife_Controller {
             }
             // 创建新的Tab并添加WebView到其中
             Tab temp_tab = new Tab(tag_name, fxmlNode);
+            temp_tab.setContextMenu(get_ContextMenu(temp_tab));
             encode_tab.getTabs().add(temp_tab);
             encode_tab.getSelectionModel().select(temp_tab);
             // 添加关闭Tab时的事件处理
@@ -1285,6 +1360,7 @@ public class Ctfknife_Controller {
             target.setMainController(this,encode_catagory,encode);
             // 创建新的Tab并添加WebView到其中
             Tab temp_tab = new Tab(tag_name, fxmlNode);
+            temp_tab.setContextMenu(get_ContextMenu(temp_tab));
             encode_tab.getTabs().add(temp_tab);
             encode_tab.getSelectionModel().select(temp_tab);
             // 添加关闭Tab时的事件处理
@@ -1321,7 +1397,6 @@ public class Ctfknife_Controller {
         Add_Tag_Ui(encode_type,"Ui/Encrypt/rsa.fxml");
 
     }
-
     @FXML
     void func_sm2(ActionEvent event) {
         String encode_type = Get_Event_Source_Text(event);
@@ -1383,7 +1458,7 @@ public class Ctfknife_Controller {
                 break;
             case "无":
             default:
-                Style_Css = "";
+                Style_Css = "css/default.css";
                 input_encodeing.getScene().getWindow().getScene().getStylesheets().clear();
                 break;
         }
@@ -1439,6 +1514,13 @@ public class Ctfknife_Controller {
         }
 
     }
-
+    @FXML
+    void func_github(ActionEvent event) {
+        try{
+            Desktop.getDesktop().browse(new URI(CtfknifeApplication.Tools_Github));
+        }catch (Exception e){
+            f_alert_informationDialog("提示", "", "打开浏览器失败！\r\n"+e.getMessage());
+        }
+    }
 
 }

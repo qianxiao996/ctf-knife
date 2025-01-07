@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.371" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Xor">
+<VBox alignment="CENTER" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Xor">
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -23,15 +23,15 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="ket_text" maxHeight="32.0" minHeight="32.0" promptText="请输入Key" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="key_encoding" minHeight="32.0" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="ket_text" maxHeight="32.0" promptText="请输入Key" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="key_encoding" prefWidth="150.0" HBox.hgrow="ALWAYS" />
             <Label text="输出编码">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="out_encoding" minHeight="32.0" prefWidth="150.0" />
-            <Button mnemonicParsing="false" onAction="#func_xor" prefHeight="32.0" text="Xor" fx:id="xor">
+            <ComboBox fx:id="out_encoding" prefWidth="150.0" />
+            <Button mnemonicParsing="false" onAction="#func_xor" text="Xor" fx:id="xor">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>

@@ -21,14 +21,14 @@
             <HBox>
                <children>
                   <TextField fx:id="text_key_1" />
-                  <ComboBox fx:id="key_1_encoding" minHeight="32.0" prefWidth="110.0" />
+                  <ComboBox fx:id="key_1_encoding" prefWidth="110.0" />
                </children>
             </HBox>
             <Label text="Key2:" />
             <HBox>
                <children>
                   <TextField fx:id="text_key_2" />
-                  <ComboBox fx:id="key_2_encoding" minHeight="32.0" prefWidth="110.0" />
+                  <ComboBox fx:id="key_2_encoding" prefWidth="110.0" />
                </children>
             </HBox>
             <Button fx:id="source_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" text="复制" textAlignment="CENTER">

@@ -19,18 +19,20 @@ public class CtfknifeApplication extends Application {
 //    }
 //    public static String Style_Css = "css/RedBlue.css";
     public static String Style_Css = "";
+    public static String Tools_Name = "CTF-Knife";
+    public static String Tools_Version = "v1.2";
+    public static String Tools_Author = "浅笑996";
+    public static String Tools_Github = "https://github.com/qianxiao996/ctf-knife";
     @Override // javafx.application.Application
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CtfknifeApplication.class.getResource("Ui/ctfknife.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 //        stage.setResizable(false);
-        stage.setTitle("CTF-Knife 编码解码工具v1.1");
+        stage.setTitle(Tools_Name+" "+Tools_Version+" by "+Tools_Author);
         Image icon_image= new Image(Objects.requireNonNull(CtfknifeApplication.class.getResourceAsStream("img/ico.png")));
         stage.getIcons().add(icon_image);
         Ctfknife_Controller.read_config();
-        if(Global_Config.containsKey("css")){
-            Style_Css = Global_Config.get("css");
-        }
+        Style_Css = Global_Config.getOrDefault("css", "css/default.css");
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Style_Css)).toExternalForm());
         stage.setScene(scene);
         Tray taryWindow = new Tray(stage, Objects.requireNonNull(getClass().getResource("img/ico.png")).toString(), "CTF-Knife");

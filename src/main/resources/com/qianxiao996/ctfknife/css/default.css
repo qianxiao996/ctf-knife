@@ -1,0 +1,21 @@
+#about_img{
+    -fx-border-radius: 5px;
+}
+#about_email{
+    -fx-text-fill: #d79c9c;
+
+}
+#about_user{
+    -fx-text-fill: #d38d8d;
+}
+/* 定义一个通用的选择器，为所有指定ID的按钮在pressed状态下应用相同的样式 */
+#source_textarea_copy:pressed,
+#result_textarea_copy:pressed,
+#source_textarea_paste:pressed,
+#result_textarea_paste:pressed,
+#source_textarea_clear:pressed,
+#result_textarea_clear:pressed,
+#button_to_source:pressed {
+    -fx-translate-y: 2; /* 向下移动2个单位 */
+    -fx-translate-x: 2; /* 向右移动2个单位 */
+}

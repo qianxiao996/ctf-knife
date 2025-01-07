@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.371" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Rc4">
+<VBox alignment="CENTER" spacing="3.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Encrypt.Controller_Rc4">
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -23,26 +23,26 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="ket_text" maxHeight="32.0" minHeight="32.0" promptText="请输入Key" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="key_encoding" minHeight="32.0" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="ket_text" maxHeight="32.0" promptText="请输入Key" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="key_encoding" prefWidth="150.0" HBox.hgrow="ALWAYS" />
             <Label text="输入编码">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="input_encoding" minHeight="32.0" prefWidth="150.0" />
+            <ComboBox fx:id="input_encoding" prefWidth="150.0" />
             <Label text="输出编码">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="out_encoding" minHeight="32.0" prefWidth="150.0" />
-            <Button mnemonicParsing="false" onAction="#func_encrypt" prefHeight="32.0" text="加密">
+            <ComboBox fx:id="out_encoding" prefWidth="150.0" />
+            <Button mnemonicParsing="false" onAction="#func_encrypt" text="加密">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="rc41" mnemonicParsing="false" onAction="#func_decrypt" prefHeight="32.0" text="解密" />
+            <Button fx:id="rc41" mnemonicParsing="false" onAction="#func_decrypt" text="解密" />
          </children>
          <VBox.margin>
             <Insets right="5.0" />

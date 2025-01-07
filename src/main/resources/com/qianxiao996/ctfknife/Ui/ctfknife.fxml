@@ -21,407 +21,420 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="948.0" prefWidth="1492.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Ctfknife_Controller">
+<GridPane prefHeight="874.0" prefWidth="1448.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qianxiao996.ctfknife.Controller.Ctfknife_Controller">
    <columnConstraints>
       <ColumnConstraints />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
    </rowConstraints>
    <children>
-      <HBox GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <TextField fx:id="sider_search" maxWidth="300.0" minWidth="250.0" onKeyReleased="#tree_search" prefWidth="250.0" promptText="请输入进行搜索" />
+      <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <VBox fx:id="sider_vbox" maxWidth="300.0" minWidth="250.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER" spacing="5.0">
+               <VBox.margin>
+                  <Insets bottom="1.0" left="1.0" right="1.0" />
+               </VBox.margin>
                <children>
-                  <TextField fx:id="sider_search" maxWidth="300.0" minWidth="250.0" onKeyReleased="#tree_search" prefHeight="25.0" prefWidth="250.0" promptText="请输入进行搜索" />
-                  <TreeView fx:id="sider_tree" maxWidth="300.0" minWidth="250.0" prefWidth="250.0" showRoot="false" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-            <VBox spacing="5.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <MenuBar fx:id="menubar">
-                    <menus>
-                      <Menu mnemonicParsing="false" text="常见编码">
-                        <items>
-                          <MenuItem mnemonicParsing="false" onAction="#func_encode" text="URL" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Unicode" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Escape(%U)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="HtmlEncode" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(2进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(8进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(10进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(16进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Shellcode" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Qwerty" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Str-&gt;Hex" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Quoted Printable" />
-                              <Menu mnemonicParsing="false" text="图片转换">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="图片-&gt;Hex" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="图片-&gt;Base64" />
-                                </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="JS加密系列">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="JsFuck" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="JJEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="AAEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="XXEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="UUEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="jother" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="BrainFuck" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Ook" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Ook(Short)" />
-                                </items>
-                              </Menu>
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="百家姓编码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="核心价值观编码" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="常见解码">
-                        <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="URL" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Unicode" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Escape(%U)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="HtmlEncode" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(2进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(8进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(10进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(16进制)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Shellcode" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Qwerty" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Hex-&gt;Str" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Quoted Printable" />
-                              <Menu mnemonicParsing="false" text="图片转换">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Hex-&gt;图片" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Base64-&gt;图片" />
-                                 </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="JS加密系列">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="JsFuck" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="JJEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="AAEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="XXEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="UUEncode" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="jother" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="BrainFuck" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Ook" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Ook(Short)" />
-                                 </items>
-                              </Menu>
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="百家姓编码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decode" text="核心价值观编码" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Base编码">
-                        <items>
-                          <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base16" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base32" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base36" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base58" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base62" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base64" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base64(自定义)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base85" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base91" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base92" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base100" />
-                        </items>
-                      </Menu>
-                        <Menu mnemonicParsing="false" text="Base解码">
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base16" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base32" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base36" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base58" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base62" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base64" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base64(自定义)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base85" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base91" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base92" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base100" />
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="加密">
-                           <items>
-                              <Menu mnemonicParsing="false" text="ROT系列">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot5" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot13" />
-                                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot18" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot47" />
-                                </items>
-                              </Menu>
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="凯撒密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="栅栏密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="培根密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="摩斯密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="云影密码(01248)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="当铺密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="a1z26密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="埃特巴什码" />
-                              <Menu mnemonicParsing="false" text="与佛论禅">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="与佛论禅(v1)" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="如是我闻" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_html" text="与佛论禅(v2)" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_html" text="Sealed Book(天书)" />
-                                </items>
-                              </Menu>
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="解密">
-                           <items>
-                              <Menu mnemonicParsing="false" text="ROT系列">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot5" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot13" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot18" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot47" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot8000" />
-                                </items>
-                              </Menu>
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="凯撒密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="栅栏密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="培根密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="摩斯密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="移位密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="云影密码(01248)" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="当铺密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="a1z26密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="埃特巴什码" />
-                              <Menu mnemonicParsing="false" text="与佛论禅">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="与佛论禅(v1)" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="如是我闻" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_html" text="与佛论禅(v2)" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_html" text="Sealed Book(天书)" />
-                                </items>
-                              </Menu>
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="单Key加密">
-                          <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt_one_key" text="维吉尼亚密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt_one_key" text="棋盘密码(ADFGX)" />
-                          </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="多Key加密">
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt_two_key" text="四方密码" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_encrypt_two_key" text="仿射密码" />
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="现代密码">
-                          <items>
-                              <Menu mnemonicParsing="false" text="流密码">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt_xor" text="Xor" />
-                                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt_rc4" text="RC4" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_html" text="Rabbit Legacy" />
-                                </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="对称密码">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_aes" text="AES" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_des_3des" text="DES/3DES" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_sm4" text="SM4" />
-                                </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="非对称密码">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_rsa" text="RSA" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_sm2" text="Sm2" />
-                                 </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="哈希算法">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="MD4" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="MD5" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sm3" />
-                                 </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="Sha家族">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha1" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha224" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha256" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha384" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha512" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-224" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-256" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-384" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-512" />
-                                </items>
-                              </Menu>
-                              <Menu mnemonicParsing="false" text="HMAC">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA1" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA224" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA256" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA384" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA512" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACMD5" />
-                                </items>
-                              </Menu>
-                          </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="HTML工具">
-                          <items>
-                            <MenuItem fx:id="zero_width" mnemonicParsing="false" onAction="#func_html" text="零宽隐写" />
-                              <MenuItem fx:id="cryptojs" mnemonicParsing="false" onAction="#func_html" text="CryptoJS AES/DES/3DES/RC4/Rabbit" />
-                              <MenuItem fx:id="CyberChef" mnemonicParsing="false" onAction="#func_html" text="CyberChef" />
-                              <MenuItem fx:id="CyberChef1" mnemonicParsing="false" onAction="#func_html" text="蝌蚪文加解密" />
-                          </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="进制转换">
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="2-&gt;8" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="2-&gt;10" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="2-&gt;16" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="8-&gt;2" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="8-&gt;10" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="8-&gt;16" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="10-&gt;2" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="10-&gt;8" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="10-&gt;16" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="16-&gt;2" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="16-&gt;8" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="16-&gt;10" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="自定义" />
-                           </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="字符处理">
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="替换" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="分割" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="拆分" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="统计" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="反转" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="全小写" />
-                              <MenuItem mnemonicParsing="false" onAction="#func_tools" text="全大写" />
-                           </items>
-                        </Menu>
-                        <Menu fx:id="encode_zaixian_tools" mnemonicParsing="false" text="在线工具" />
-                        <Menu fx:id="encode_zaixian_tools1" mnemonicParsing="false" text="其他">
-                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#func_about" text="关于作者" />
-                              <Menu mnemonicParsing="false" text="皮肤">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#func_change_css" text="无" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_change_css" text="红蓝" />
-                                    <MenuItem mnemonicParsing="false" onAction="#func_change_css" text="暗黑" />
-                                </items>
-                              </Menu>
-                           </items>
-                        </Menu>
-            
-                    </menus>
-                  </MenuBar>
-                  <VBox VBox.vgrow="ALWAYS">
+                  <Button fx:id="is_open_sider" mnemonicParsing="false" onAction="#show_hidden_search_sider" text="\$">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <HBox alignment="CENTER" fillHeight="false" spacing="5.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox spacing="5.0">
-                           <VBox.margin>
-                              <Insets bottom="1.0" left="1.0" right="1.0" />
-                           </VBox.margin>
+                        <CheckBox fx:id="encode_line" mnemonicParsing="false" prefHeight="23.0" text="按行处理" HBox.hgrow="ALWAYS" />
+                        <Label text="输入编码" />
+                        <ComboBox fx:id="input_encodeing" HBox.hgrow="ALWAYS" />
+                        <Label text="输出编码" />
+                        <ComboBox fx:id="output_encodeing" />
+                        <Button fx:id="encode_add_tab" mnemonicParsing="false" onAction="#func_encode_add_tab" text="增加页面" />
+                        <Button fx:id="encode_base_go" mnemonicParsing="false" onAction="#func_encode_base_go" text="一键Base" />
+                        <Button fx:id="encode_decode_go" mnemonicParsing="false" onAction="#func_encode_decode_go" text="一键解码" />
+                        <Button fx:id="encode_decrypt_go" mnemonicParsing="false" onAction="#func_encode_decrypto_go" text="一键解密" />
+                        <Button fx:id="encode_getflag_go" mnemonicParsing="false" onAction="#func_encode_getflag_go" text="一键获取Flag" />
+                        <Button fx:id="encode_image" mnemonicParsing="false" onAction="#open_encode_images" text="编码图" />
+                        <Button fx:id="button_ascii" mnemonicParsing="false" onAction="#open_encode_images_ascii" text="Ascii" />
+                        <Button fx:id="button_file" mnemonicParsing="false" onAction="#open_encode_images_file" text="文件头" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <TabPane fx:id="encode_tab" onMouseClicked="#tab_add_pane" prefHeight="904.0" prefWidth="1172.0" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab fx:id="tab_996" onCloseRequest="#encode_close_tab" text="996">
+                  <content>
+                        <VBox spacing="3.0">
                            <children>
-                              <Button fx:id="is_open_sider" mnemonicParsing="false" onAction="#show_hidden_search_sider" text="\$">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Button>
-                              <HBox alignment="CENTER" fillHeight="false" spacing="5.0" HBox.hgrow="ALWAYS">
+                              <HBox alignment="CENTER" spacing="5.0">
                                  <children>
-                                    <CheckBox fx:id="encode_line" mnemonicParsing="false" prefHeight="23.0" text="按行处理" HBox.hgrow="ALWAYS" />
-                                    <Label text="输入编码" />
-                                    <ComboBox fx:id="input_encodeing" HBox.hgrow="ALWAYS" />
-                                    <Label text="输出编码" />
-                                    <ComboBox fx:id="output_encodeing" />
-                                    <Button fx:id="encode_add_tab" mnemonicParsing="false" onAction="#func_encode_add_tab" text="增加页面" />
-                                    <Button fx:id="encode_base_go" mnemonicParsing="false" onAction="#func_encode_base_go" text="一键Base" />
-                                    <Button fx:id="encode_decode_go" mnemonicParsing="false" onAction="#func_encode_decode_go" text="一键解码" />
-                                    <Button fx:id="encode_decrypt_go" mnemonicParsing="false" onAction="#func_encode_decrypto_go" text="一键解密" />
-                                    <Button fx:id="encode_getflag_go" mnemonicParsing="false" onAction="#func_encode_getflag_go" text="一键获取Flag" />
-                                    <Button fx:id="encode_image" mnemonicParsing="false" onAction="#open_encode_images" text="编码图" />
-                                    <Button fx:id="button_ascii" mnemonicParsing="false" onAction="#open_encode_images_ascii" text="Ascii" />
-                                    <Button fx:id="button_file" mnemonicParsing="false" onAction="#open_encode_images_file" text="文件头" />
+                                    <Label alignment="TOP_LEFT" text="源文本：" HBox.hgrow="ALWAYS" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="source_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#copy_text" text="复制" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <tooltip>
+                                          <Tooltip text="复制" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button fx:id="source_textarea_paste" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#paste_text" text="粘贴" textAlignment="CENTER">
+                                       <tooltip>
+                                          <Tooltip text="粘贴" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button fx:id="source_textarea_clear" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#clear_text" text="清空" textAlignment="CENTER">
+                                       <tooltip>
+                                          <Tooltip text="清空" />
+                                       </tooltip>
+                                    </Button>
                                  </children>
                               </HBox>
+                              <TextArea fx:id="TextArea_Source" wrapText="true" VBox.vgrow="ALWAYS" />
+                              <HBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" contentDisplay="TOP" text="结果：" HBox.hgrow="ALWAYS" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="button_to_source" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#func_encode_to_source" text="转源" textAlignment="CENTER">
+                                       <tooltip>
+                                          <Tooltip text="转源文本" />
+                                       </tooltip>
+                                    </Button>
+                                  <Button fx:id="result_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#copy_text" text="复制" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <tooltip>
+                                          <Tooltip text="复制" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button fx:id="result_textarea_paste" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#paste_text" text="粘贴" textAlignment="CENTER">
+                                       <tooltip>
+                                          <Tooltip text="粘贴" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button fx:id="result_textarea_clear" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#clear_text" text="清空">
+                                       <tooltip>
+                                          <Tooltip text="清空" />
+                                       </tooltip>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="TextArea_Result" wrapText="true" VBox.vgrow="ALWAYS" />
                            </children>
-                        </HBox>
-                        <TabPane fx:id="encode_tab" onMouseClicked="#tab_add_pane" prefHeight="904.0" prefWidth="1172.0" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS">
-                          <tabs>
-                            <Tab onCloseRequest="#encode_close_tab" text="996">
-                              <content>
-                                    <VBox spacing="3.0">
-                                       <children>
-                                          <HBox alignment="CENTER" spacing="5.0">
-                                             <children>
-                                                <Label alignment="TOP_LEFT" text="源文本：" HBox.hgrow="ALWAYS" />
-                                                <Region HBox.hgrow="ALWAYS" />
-                                                <Button fx:id="source_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#copy_text" text="复制" textAlignment="CENTER">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <tooltip>
-                                                      <Tooltip text="复制" />
-                                                   </tooltip>
-                                                </Button>
-                                                <Button fx:id="source_textarea_paste" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#paste_text" text="粘贴" textAlignment="CENTER">
-                                                   <tooltip>
-                                                      <Tooltip text="粘贴" />
-                                                   </tooltip></Button>
-                                                <Button fx:id="source_textarea_clear" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#clear_text" text="清空" textAlignment="CENTER">
-                                                   <tooltip>
-                                                      <Tooltip text="清空" />
-                                                   </tooltip></Button>
-                                             </children>
-                                          </HBox>
-                                          <TextArea fx:id="TextArea_Source" wrapText="true" VBox.vgrow="ALWAYS" />
-                                          <HBox alignment="CENTER" spacing="5.0">
-                                             <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="TOP" text="结果：" HBox.hgrow="ALWAYS" />
-                                                <Region HBox.hgrow="ALWAYS" />
-                                                <Button fx:id="button_to_source" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#func_encode_to_source" text="转源" textAlignment="CENTER">
-                                                   <tooltip>
-                                                      <Tooltip text="转源文本" />
-                                                   </tooltip></Button>
-                                              <Button fx:id="result_textarea_copy" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#copy_text" text="复制" textAlignment="CENTER">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <tooltip>
-                                                      <Tooltip text="复制" />
-                                                   </tooltip>
-                                                </Button>
-                                                <Button fx:id="result_textarea_paste" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#paste_text" text="粘贴" textAlignment="CENTER">
-                                                   <tooltip>
-                                                      <Tooltip text="粘贴" />
-                                                   </tooltip></Button>
-                                                <Button fx:id="result_textarea_clear" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#clear_text" text="清空">
-                                                   <tooltip>
-                                                      <Tooltip text="清空" />
-                                                   </tooltip></Button>
-                                             </children>
-                                          </HBox>
-                                          <TextArea fx:id="TextArea_Result" wrapText="true" VBox.vgrow="ALWAYS" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </VBox>
-                              </content>
-                            </Tab>
-                          </tabs>
-                        </TabPane>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
          </children>
-      </HBox>
+      </VBox>
+      <TreeView fx:id="sider_tree" maxWidth="300.0" minWidth="250.0" prefWidth="250.0" showRoot="false" GridPane.rowIndex="1" />
+      <MenuBar fx:id="menubar" GridPane.columnIndex="1">
+        <menus>
+          <Menu mnemonicParsing="false" text="常见编码">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#func_encode" text="URL" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Unicode" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Escape(%U)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="HtmlEncode" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(2进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(8进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(10进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="ASCII(16进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Shellcode" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Qwerty" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Str-&gt;Hex" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Hex-&gt;Base64" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Quoted Printable" />
+                  <Menu mnemonicParsing="false" text="图片转换">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_encode" text="图片-&gt;Hex" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="图片-&gt;Base64" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="文件转换">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="文件-&gt;Hex" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="文件-&gt;Base64" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="JS加密系列">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_encode" text="JsFuck" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="JJEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="AAEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="XXEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="UUEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="jother" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="BrainFuck" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Ook" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encode" text="Ook(Short)" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="百家姓编码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encode" text="核心价值观编码" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="常见解码">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="URL" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Unicode" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Escape(%U)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="HtmlEncode" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(2进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(8进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(10进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="ASCII(16进制)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Shellcode" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Qwerty" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Hex-&gt;Str" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Base64-&gt;Hex" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Quoted Printable" />
+                  <Menu mnemonicParsing="false" text="图片转换">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Hex-&gt;图片" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Base64-&gt;图片" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="文件转换">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Hex-&gt;文件" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Base64-&gt;文件" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="JS加密系列">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="JsFuck" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="JJEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="AAEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="XXEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="UUEncode" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="jother" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="BrainFuck" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Ook" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decode" text="Ook(Short)" />
+                     </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="百家姓编码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decode" text="核心价值观编码" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Base编码">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base16" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base32" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base36" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base58" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base62" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base64" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base64(自定义)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base85" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base91" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base92" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_encode" text="Base100" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Base解码">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base16" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base32" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base36" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base58" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base62" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base64" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base64(自定义)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base85" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base91" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base92" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_base_decode" text="Base100" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="加密">
+               <items>
+                  <Menu mnemonicParsing="false" text="ROT系列">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot5" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot13" />
+                      <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot18" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="Rot47" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="凯撒密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="栅栏密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="培根密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="摩斯密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="云影密码(01248)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="当铺密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="a1z26密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="埃特巴什码" />
+                  <Menu mnemonicParsing="false" text="与佛论禅">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="与佛论禅(v1)" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_encrypt" text="如是我闻" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_html" text="与佛论禅(v2)" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_html" text="Sealed Book(天书)" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="解密">
+               <items>
+                  <Menu mnemonicParsing="false" text="ROT系列">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot5" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot13" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot18" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot47" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="Rot8000" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="凯撒密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="栅栏密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="培根密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="摩斯密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="移位密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="云影密码(01248)" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="当铺密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="a1z26密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="埃特巴什码" />
+                  <Menu mnemonicParsing="false" text="与佛论禅">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="与佛论禅(v1)" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_decrypt" text="如是我闻" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_html" text="与佛论禅(v2)" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_html" text="Sealed Book(天书)" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="单Key加密">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt_one_key" text="维吉尼亚密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt_one_key" text="棋盘密码(ADFGX)" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="多Key加密">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt_two_key" text="四方密码" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_encrypt_two_key" text="仿射密码" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="现代密码">
+              <items>
+                  <Menu mnemonicParsing="false" text="流密码">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_encrypt_xor" text="Xor" />
+                      <MenuItem mnemonicParsing="false" onAction="#func_encrypt_rc4" text="RC4" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_html" text="Rabbit Legacy" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="对称密码">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_aes" text="AES" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_des_3des" text="DES/3DES" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_sm4" text="SM4" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="非对称密码">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_rsa" text="RSA" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_sm2" text="Sm2" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="哈希算法">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="MD4" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="MD5" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sm3" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Sha家族">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha1" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha224" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha256" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha384" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha512" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-224" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-256" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-384" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="Sha3-512" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="HMAC">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA1" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA224" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA256" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA384" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACSHA512" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_crypto" text="HMACMD5" />
+                    </items>
+                  </Menu>
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="HTML工具">
+              <items>
+                <MenuItem fx:id="zero_width" mnemonicParsing="false" onAction="#func_html" text="零宽隐写" />
+                  <MenuItem fx:id="cryptojs" mnemonicParsing="false" onAction="#func_html" text="CryptoJS AES/DES/3DES/RC4/Rabbit" />
+                  <MenuItem fx:id="CyberChef" mnemonicParsing="false" onAction="#func_html" text="CyberChef" />
+                  <MenuItem fx:id="CyberChef1" mnemonicParsing="false" onAction="#func_html" text="蝌蚪文加解密" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="进制转换">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="2-&gt;8" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="2-&gt;10" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="2-&gt;16" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="8-&gt;2" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="8-&gt;10" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="8-&gt;16" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="10-&gt;2" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="10-&gt;8" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="10-&gt;16" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="16-&gt;2" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="16-&gt;8" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="16-&gt;10" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_jinzhi" text="自定义" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="字符处理">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="替换" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="分割" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="拆分" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="统计" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="反转" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="全小写" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_tools" text="全大写" />
+               </items>
+            </Menu>
+            <Menu fx:id="encode_zaixian_tools" mnemonicParsing="false" text="在线工具" />
+            <Menu fx:id="encode_zaixian_tools1" mnemonicParsing="false" text="其他">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#func_about" text="关于作者" />
+                  <MenuItem mnemonicParsing="false" onAction="#func_github" text="Github" />
+                  <Menu mnemonicParsing="false" text="皮肤">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#func_change_css" text="默认" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_change_css" text="红蓝" />
+                        <MenuItem mnemonicParsing="false" onAction="#func_change_css" text="暗黑" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+
+                    </menus>
+      </MenuBar>
    </children>
 </GridPane>

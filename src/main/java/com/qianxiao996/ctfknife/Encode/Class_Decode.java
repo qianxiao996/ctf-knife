@@ -6,6 +6,7 @@ import com.qianxiao996.ctfknife.Utils.Conn;
 import com.qianxiao996.ctfknife.Utils.Result;
 import javafx.scene.control.TextArea;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.bouncycastle.util.encoders.Hex;
 
 import javax.imageio.stream.FileImageOutputStream;
 import javax.script.ScriptException;
@@ -54,7 +55,7 @@ public class Class_Decode extends Thread {
 
         //遍历编码
         Class<? extends Class_Decode> clazz = this.getClass();
-        ArrayList<String> open_file_list = new ArrayList<>(Arrays.asList("Hex->图片","Base64->图片"));
+        ArrayList<String> open_file_list = new ArrayList<>(Arrays.asList("Hex->图片","Base64->图片","Hex->文件","Base64->文件"));
         if(!open_file_list.contains(Encode_type)){
             textarea_result.clear();
         }
@@ -400,4 +401,44 @@ public class Class_Decode extends Thread {
         String result =  Conn.ExEjs_2("js/Quoted-Printable.js","unescapeFromQuotedPrintable",text,input_encoding);
         return new Result(name, true, result);
     }
+
+    public Result Fuc_Base64_Hex(String name,String text) {
+        try{
+            byte[] text2 = Base64.getDecoder().decode(text.getBytes(input_encoding));
+            String result = Hex.toHexString(text2);
+            return new Result(name, true, result);
+        }catch (Exception e){
+            return new Result(name, false, e.getMessage());
+        }
+
+    }
+    public Result Fuc_Hex_文件(String name,String hex_text) {
+        try{
+            byte[] bytes = stringToByte(hex_text);
+            String file_save_path = textarea_result.getText();
+            textarea_result.clear();
+            FileImageOutputStream imageOutput = new FileImageOutputStream(new File(file_save_path));
+            imageOutput.write(bytes, 0, bytes.length);
+            imageOutput.close();
+            return new Result(name,true,"文件保存成功！位置："+file_save_path);
+        }catch (Exception e){
+            return new Result(name, false, e.getMessage());
+        }
+    }
+    public Result Fuc_Base64_文件(String name,String base64_text) {
+        try{
+            String file_save_path = textarea_result.getText();
+            textarea_result.clear();
+            //获取JDK8里的解码器Base64.Decoder,将base64字符串转为字节数组
+            byte[] bytes = Base64.getDecoder().decode(base64_text);
+            //构建字节数组输入流
+            FileImageOutputStream imageOutput = new FileImageOutputStream(new File(file_save_path));
+            imageOutput.write(bytes, 0, bytes.length);
+            imageOutput.close();
+            return new Result(name,true,"文件保存成功！位置："+file_save_path);
+        }catch (Exception e){
+            return new Result(name, false, e.getMessage());
+        }
+    }
+
 }
